@@ -1,0 +1,20 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+
+<project name="IrisLogin" basedir="../iris" default="update">
+	<property file="./build.properties" />
+	
+	<property name="new_release_name"  value="TODO" override="true" />
+	
+	
+	<target name="install" description="Task to use before a new install of the software.">
+		<echo msg="Setting up IrisLogin for the first run" />
+	</target>
+	
+	<target name="update" description="Task that should be used after performing an update to the code">
+		<echo msg="Updating IrisLogin" />
+	</target>
+	
+	<target name="release" description="Task used to create a new release of the software.">
+		<echo msg="Creating new Release of IrisLogin: ${new_release_name}" />
+	</target>
+</project>
