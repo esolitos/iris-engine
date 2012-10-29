@@ -1,0 +1,104 @@
+/* Admin css */
+
+
+/* Admin Menu */
+ul.top-menu {
+	display:block;
+	list-style:none;
+	float:right;
+	margin-top: 0;
+	margin-bottom: 25px;
+}
+
+ul.top-menu *{
+	color:#380463;
+	text-decoration:none;
+	font-style:italic;
+}
+
+ul.top-menu a{
+	font-weight:bold;
+}
+
+ul.top-menu li,
+ul.not-logged li.active{
+	display:inline-block;
+	text-decoration:none;
+	padding:8px 15px;
+	float:left;
+	
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	border-right: 1px solid gray;
+	
+	background: rgb(246,248,249);
+	background: -moz-linear-gradient(top, rgba(246,248,249,1) 0%, rgba(229,235,238,1) 50%, rgba(215,222,227,1) 51%, rgba(245,247,249,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(246,248,249,1)), color-stop(50%,rgba(229,235,238,1)), color-stop(51%,rgba(215,222,227,1)), color-stop(100%,rgba(245,247,249,1)));
+	background: -webkit-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%);
+	background: -o-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%);
+	background: -ms-linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%);
+	background: linear-gradient(top, rgba(246,248,249,1) 0%,rgba(229,235,238,1) 50%,rgba(215,222,227,1) 51%,rgba(245,247,249,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f8f9', endColorstr='#f5f7f9',GradientType=0 );
+}
+
+ul.not-logged li, 
+ul.top-menu li.disabled {
+	text-decoration:line-through;
+	background: #c8c8c8;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2M4YzhjOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2I0YjRiNCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUxJSIgc3RvcC1jb2xvcj0iI2FhYWFhYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjOGM4YzgiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #c8c8c8 0%, #b4b4b4 50%, #aaaaaa 51%, #c8c8c8 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c8c8c8), color-stop(50%,#b4b4b4), color-stop(51%,#aaaaaa), color-stop(100%,#c8c8c8));
+	background: -webkit-linear-gradient(top,  #c8c8c8 0%,#b4b4b4 50%,#aaaaaa 51%,#c8c8c8 100%);
+	background: -o-linear-gradient(top,  #c8c8c8 0%,#b4b4b4 50%,#aaaaaa 51%,#c8c8c8 100%);
+	background: -ms-linear-gradient(top,  #c8c8c8 0%,#b4b4b4 50%,#aaaaaa 51%,#c8c8c8 100%);
+	background: linear-gradient(top,  #c8c8c8 0%,#b4b4b4 50%,#aaaaaa 51%,#c8c8c8 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c8c8c8', endColorstr='#c8c8c8',GradientType=0 );
+	
+}
+
+ul.top-menu li:first-child {
+	border-left: 1px solid gray;
+	
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+ul.top-menu li:last-child {
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+
+
+#offer-list .offer,
+#website_list .website{
+	display:block;
+	padding:10px;
+	margin:10px auto;
+	width:80%;
+	border: 3px solid rgba(255,255,255,0.5);
+	background:rgba(255,255,255,0.3);
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+}
+
+.no_subscriptions {
+	display:block;
+	margin-top: 20px;
+	margin-left: 30px;
+}
+
+textarea.editor {
+	width:95%;
+	min-width:300px;
+}
+

@@ -1,0 +1,24 @@
+/* testing.css */
+
+#testing_links {
+	list-style:none;
+	display:block;
+	font-size:smaller;
+	line-height:80%;
+}
+
+#testing_links li {
+	display:inline-block;
+	float:left;
+	padding:5px 10px;
+	border-right: 1px solid green;
+}
+
+#testing_links li:last-child {
+	border-right:none;
+}
+
+#testing_links li a {
+	color:black;
+	text-decoration:none;
+}
