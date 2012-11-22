@@ -50,7 +50,7 @@ define('IRIS_MAIL_SUPPORT', 'supporto@irislogin.it');
 define('IRIS_MAIL_TECH', 'tecnici@irislogin.it');
 define('ENGINE_MAIL', 'engine@irislogin.it');
 
-define('DEFAUT_PASSWORD', 'IRIS-welcome-1234');
+define('DEFAUT_PASSWORD', 'IRISLOGIN-welcome-pass');
 
 // SERVER Path
 define('PATH_SRV_UPLOAD', FCPATH.'public/upload/');

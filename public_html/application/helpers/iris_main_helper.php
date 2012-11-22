@@ -214,4 +214,12 @@ if( ! function_exists('init_viewdata') )
 
 		return json_decode($result);
 	}
+	
+	function mkdir_if($dirname='')
+	{
+		if ( ! file_exists($dirname))
+			return mkdir($dirname, 0775, TRUE);
+		
+		return TRUE;
+	}
 }

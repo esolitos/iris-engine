@@ -179,6 +179,8 @@ class Gallery extends CI_Controller
 				}
 				else
 				{
+					mkdir_if(PATH_SRV_GALLERY."$g_id/");
+
 					$upload_config['upload_path'] = PATH_SRV_GALLERY."$g_id/";
 					$result['thumb_path'] =  PATH_WEB_GALLERY."$g_id/";
 				}

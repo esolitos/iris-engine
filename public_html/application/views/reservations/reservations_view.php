@@ -181,7 +181,7 @@
 		</div>
 
 		<p>
-			<strong>Importante</strong>: Dopo aver inviato la richiesta dovrai attendere una comunicazione da parte dell'albergo prima di considerare la valida la prenotazione.
+			<strong>Importante</strong>: Dopo aver inviato la richiesta dovrai attendere una nostra comunicazione per la disponibilità del periodo richiesto e la conferma della prenotazione.
 		</p>
 		<input type="submit" name="submit" class="btn btn-primary" value="Invia Richiesta &rarr;"/>
 		
