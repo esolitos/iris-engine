@@ -36,7 +36,11 @@
 		<div class="well offer clearfix<?if(!$offer->offer_visible) echo " hidden";if($offer->expired) echo " expired";if($offer->offer_special) echo " special";?>">
 			<h2 class="offer_title">
 				<?php if($offer->offer_special):?>
-					<img src="<?=base_url(PATH_WEB_UPLOAD.$special_img)?>" class="special-img">
+					<?php if ($special_img): ?>
+						<img src="<?=base_url(PATH_WEB_UPLOAD.$special_img)?>" class="special-img">
+					<?php else: ?>
+						<img src="<?=base_url("/public/img/icon-special.png")?>" class="special-img">
+					<?php endif ?>
 				<? endif; ?>
 				<?=$offer->offer_title?>
 				<?if($offer->expired AND $user):?>

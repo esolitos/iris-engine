@@ -271,8 +271,8 @@ $(document).ready(function(){
 						</fieldset>
 
 						<div class="form-actions">
-							<input type="submit" class="btn btn-primary" name="action" value="Salva Bozza"/>
-							<input type="submit" class="btn btn-success" name="action" value="Invia Subito"/>
+							<!-- <input type="submit" class="btn btn-primary" name="action" value="Salva Bozza"/> -->
+							<input type="submit" class="btn btn-success" name="action" value="Invia Newsletter"/>
 							<button type="reset" class="btn">Cancella Form</button>
 							<?=anchor('admin/main', "Annulla", array('class'=>'btn'));?>
 						</div>

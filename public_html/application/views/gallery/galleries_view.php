@@ -42,11 +42,7 @@
 	});
 	</script>
 	
-	<link rel="stylesheet" href="<?=base_url("public/bootstrap/css/bootstrap.min.css")?>" type="text/css" media="screen" charset="utf-8">
-	
-	<?php if(isset($css) AND $css):?>
-		<link rel="stylesheet" href="<?=base_url($css)?>" type="text/css" media="all" charset="utf-8"/>
-	<?php endif; ?>
+	<link rel="stylesheet" href="<?=base_url($css)?>" type="text/css" media="all" charset="utf-8"/>
 	
 	<style type="text/css" media="screen">
 		.modal {

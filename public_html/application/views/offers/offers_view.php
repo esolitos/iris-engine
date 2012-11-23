@@ -7,7 +7,9 @@
 </head>
 <body>
 <div class="content container-fluid">
+	<?php if ( ! in_array("no-title", $options)): ?>
 	<h1>Offerte del momento</h1>
+	<?php endif ?>
 	
 	<!-- Including the css -->
 	<div style="display:none;visibility:hidden;">

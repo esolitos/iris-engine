@@ -52,10 +52,10 @@
 	<h2>Richiedi una Prenotazione</h2>
 	
 	<?if($error):?>
-		<span class="alert alert-error"><?=$error?></span>
+		<p><span class="alert alert-error"><?=$error?></span></p>
 	<?endif;?>
 	<?if($message):?>
-		<span class="alert alert-info"><?=$message?></span>
+		<p><span class="alert alert-info"><?=$message?></span></p>
 	<?endif;?>
 	
 	

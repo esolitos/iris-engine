@@ -50,13 +50,20 @@ class Newsletter extends CI_Controller
 						$this->view_data['error'] = $result->error;
 					else
 						$this->view_data['message'] = "{$input['name']} ({$input['email']}) &egrave; iscritto correttamente.";
+					
+					$this->view_data['title'] = "Conferma Sottoscrizione";
+					$this->view_data['css'] = $this->websites_model->get_style($w_id, SERVICE_ID_BOOKING);
+					$this->load->view('common/message_view', $this->view_data);
 				}
 			}
-
-			$this->view_data['form_attrib']['id'] = 'newsletter_subscription';
-			$this->view_data['form_hidden']['user_website'] = $w_id;
+			else
+			{
+				$this->view_data['form_attrib']['id'] = 'newsletter_subscription';
+				$this->view_data['form_hidden']['user_website'] = $w_id;
 			
-			output(array('newsletter/registration_view.php' => $this->view_data));
+				output(array('newsletter/registration_view.php' => $this->view_data));
+			}
+
 		}
 		else
 		{

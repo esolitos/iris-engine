@@ -13,7 +13,7 @@
 						$('.req-confirm').remove();
 						$('.request-confirmed input[request-id='+r_id+']').attr('checked', "checked");
 
-				 		alert("Richiesta Confermata");
+				 		// alert("Richiesta Confermata");
 					}
 					else {
 				 		alert("ERRORE:"+msg);						
@@ -106,7 +106,7 @@
 
 <div class="form-actions">
 	<? if( ! $req->confirmed): ?>
-	    <a class="btn req-confirm" href="<?=$req->id?>">Conferma Richiesta</a>
+	    <a class="btn close-dialog req-confirm" href="<?=$req->id?>">Indica come "Confermata"</a>
 	<? endif; ?>
     <a class="btn btn-primary close-dialog" href="#">Chiudi</a>
 </div>

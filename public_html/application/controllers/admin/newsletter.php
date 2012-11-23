@@ -99,7 +99,7 @@ class Newsletter extends CI_Controller
 				break;
 				
 			case 'add':
-				if($email != 'new')
+				if($email == 'new')
 				{
 					show_404("admin/newsletter/user/{$email}/{$action}");
 				}

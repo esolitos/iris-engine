@@ -22,7 +22,9 @@ class Gallery extends CI_Controller
 		{
 			$this->view_data['website'] = $this->websites_model->get_info($w_id);
 			$site_galleries = $this->gallery_model->get_galleries($w_id);
-			
+
+			$this->view_data['css'] = $this->websites_model->get_style($w_id, SERVICE_ID_GALLERY);
+
 			if($site_galleries['success'])
 			{
 				$this->view_data['site_galleries'] = array();
@@ -57,6 +59,9 @@ class Gallery extends CI_Controller
 		{
 			$this->view_data['start_index'] = $start_from;
 			$gallery = $this->gallery_model->load_gallery($g_id);
+		
+			if(($style = $this->websites_model->get_style($gallery->website_id, SERVICE_ID_GALLERY)) != FALSE)
+				$this->view_data['css'] = $style;
 
 			if($gallery['success'])
 				$this->view_data['gallery'] = $gallery['data'];
@@ -86,4 +91,4 @@ class Gallery extends CI_Controller
 
 
 /* End of file websites.php */
-/* Location: ./application/controllers/admin/websites.php */
+/* Location: ./application/controllers/gallery.php */

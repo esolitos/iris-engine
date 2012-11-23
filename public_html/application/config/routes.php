@@ -67,6 +67,7 @@ $route['admin/subscription/extend/(:num)/(:any)'] = "admin/websites/extend_subsc
 $route['admin/subscription/remove/(:num)/(:any)'] = "admin/websites/extend_subscr/$1/$2/TRUE"; //Removes a service
 
 $route['admin/users/(:num)'] = "admin/users/index/$1";
+$route['admin/newsletter/user/(:any)/(:any)'] = "admin/newsletter/user/$1/$2";
 $route['admin/newsletter/(:any)/(:any)'] = "admin/newsletter/action/$2/$1";
 
 

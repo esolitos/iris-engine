@@ -27,7 +27,8 @@ class Settings extends CI_Controller
 		
 		if($this->input->post('submit'))
 		{
-			if(($filename = $this->websites_model->get_style($website_id, $service)) != FALSE)
+			$filename = $this->websites_model->get_style($website_id, $service)
+			if($filename != FALSE AND $filename != STYLE_DEFAULT_FILE)
 				$this->_delete_style($filename, $website_id, $service);
 
 			$this->load->library('upload');

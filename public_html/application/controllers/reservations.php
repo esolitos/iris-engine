@@ -119,13 +119,16 @@ class Reservations extends CI_Controller
 				
 				if ($this->email->send())
 				{
+					$input['email_sent'] = 1;
 					$this->reservations_model->add_reservation($input);
-					$this->view_data['message'] = "La tua richiesta è stata inviata correttamente!";
+					$this->view_data['message'] = "La tua richiesta è stata inviata correttamente! Attendi ora la conferma da parte dell'albergatore.";
 				}
 				else
 					$this->view_data['error'] = "Errore nell'invio della richiesta! Riprova più tardi.";
 				
-				$this->index($w_id);
+				$this->view_data['title'] = "Servizio di Booking";
+				$this->view_data['css'] = $this->websites_model->get_style($w_id, SERVICE_ID_BOOKING);
+				$this->load->view('common/message_view', $this->view_data);
 				return;
 			}
 		}
