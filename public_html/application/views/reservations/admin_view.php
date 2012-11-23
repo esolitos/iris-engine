@@ -250,8 +250,8 @@ $(document).ready(function(){
 														array('from'=>"admin/reservations")); ?>
 							<input type="submit" name="submit" value="Carica nuovo File" class="btn btn-success">
 							<input class="input-file" id="css_file" name="css_file" type="file"/>
-							<?php if (isset($css_file) AND $css_file): ?>
-									<a class="btn btn-primary" href="<?=$css_file?>" target="_BLANK">Visualizza/Scarica</a>&nbsp;
+							<?php if (isset($css_file) AND $css_file != STYLE_DEFAULT_FILE): ?>
+									<a class="btn btn-primary" href="<?=base_url($css_file)?>" target="_BLANK">Visualizza/Scarica</a>&nbsp;
 									<a class="btn btn-warning" href="settings/style/<?=SERVICE_ID_BOOKING?>/remove?from=admin/reservations">Elimina CSS</a>
 							<?php endif ?>
 						</form>

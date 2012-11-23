@@ -163,7 +163,7 @@ $(document).ready(function(){
 			<ul id="tab" class="nav nav-tabs span2">
 				<li id="gallery-list-selector" class="active"><a href="#gallery-list" data-toggle="tab">Le Gallery</a></li>
 				<li id="gallery-add-selector"><a href="#gallery-add" data-toggle="tab">Nuova Gallery</a></li>
-				<!-- <li id="gallery-settings-selector"><a href="#gallery-settings" data-toggle="tab">Impostazioni</a></li> -->
+				<li id="gallery-settings-selector"><a href="#gallery-settings" data-toggle="tab">Impostazioni</a></li>
 				<li id="gallery-descr-selector"><a href="#gallery-descr" data-toggle="tab">Maggiorni Informazioni</a></li>
 			</ul> <!-- #tab -->
 
@@ -259,16 +259,29 @@ $(document).ready(function(){
 							<button type="submit" class="btn btn-primary">Salva Gallery</button>
 							<?=anchor('admin/main', "Annulla", array('class'=>'btn'));?>
 						</div>
-					</form> <!-- /admin/offers/add -->
+					</form> <!-- /admin/gallery/add -->
 					
 
 				</div>
 
-				<!-- <div class="tab-pane fade" id="gallery-settings">
+				<div class="tab-pane fade" id="gallery-settings">
 					<h2>Impostazioni Generali</h2>
-					<p>TODO</p>
+					<div class="well">
+						<h3>Foglio di Stile</h3>
+						<?php echo form_open_multipart('admin/settings/style/'.SERVICE_ID_GALLERY,
+														array('class' => 'form-inline', 'id' => 'form-add-style'),
+														array('from'=>"admin/gallery")); ?>
+							<input type="submit" name="submit" value="Carica nuovo File" class="btn btn-success">
+							<input class="input-file" id="css_file" name="css_file" type="file"/>
+							<?php if (isset($css_file) AND $css_file != STYLE_DEFAULT_FILE): ?>
+									<a class="btn btn-primary" href="<?=base_url($css_file)?>" target="_BLANK">Visualizza/Scarica</a>&nbsp;
+									<a class="btn btn-warning" href="settings/style/<?=SERVICE_ID_GALLERY?>/remove?from=admin/gallery">Elimina CSS</a>
+							<?php endif ?>
+						</form>
+						
+					</div>
 				</div>
-				 -->
+
 				
 				<div class="tab-pane fade" id="gallery-descr">
 					<p class="dark">Con il servizio gallery avrai la possibilità di inserire le tue gallerie fotografiche in una pagina dedicata. Potrai modificarle, eliminarle o aggiungerne di nuove.

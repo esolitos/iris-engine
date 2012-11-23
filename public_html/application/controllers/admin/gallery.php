@@ -28,6 +28,10 @@ class Gallery extends CI_Controller
 		$this->view_data['form_hidden'] = array('website_id'=>$this->view_data['user']['user_website']);
 
 		$this->view_data['galleries'] = $this->gallery_model->get_galleries($this->view_data['user']['user_website']);
+		
+		if(($style = $this->websites_model->get_style($this->view_data['user']['user_website'], SERVICE_ID_GALLERY)) != FALSE)
+			$this->view_data['css_file'] = $style;
+		
 		if( ! $this->view_data['galleries']['success'])
 		{
 			$this->view_data['galleries']['total'] = FALSE;

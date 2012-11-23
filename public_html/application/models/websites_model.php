@@ -9,6 +9,11 @@ class Websites_Model extends CI_Model
         parent::__construct();
 		$this->load->library('SimpleLoginSecure', '', 'login');
     }
+	
+	function get_info($id)
+	{
+		return $this->db->get_where(TABLE_WEBSITES, array('website_id' => $id))->row();
+	}
 
 	function get_all($complete=FALSE)
 	{	
@@ -217,7 +222,7 @@ class Websites_Model extends CI_Model
 			if($query->row()->style != NULL)
 				return "/".PATH_WEB_UPLOAD.$query->row()->style;
 				
-		return "/public/css/defaults/services-style.min.css";
+		return STYLE_DEFAULT_FILE;
 	}
 	
 	function add_style($website, $service, $file_name)

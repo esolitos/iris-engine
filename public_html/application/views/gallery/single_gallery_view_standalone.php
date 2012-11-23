@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>test</title>
+	<title><?=$gallery->name?></title>
 	<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -17,7 +17,7 @@
 
 	
 	<script type="text/javascript" charset="utf-8">
-	$(document).ready(function(){
+	jQuery(document).ready(function(){
 		
 		Galleria.loadTheme('<?=base_url("public/js/galleria/themes/classic/galleria.classic.min.js");?>');
 		
@@ -62,7 +62,7 @@
 </head>
 <body>
 	<script type="text/javascript" charset="utf-8">
-		$().ready(function(){
+		jQuery().ready(function(){
 			
 			var pause_ms = 2500;
 			
@@ -98,6 +98,11 @@
 			// });
 		});
 	</script>
+	
+	<?php if(isset($css) AND $css):?>
+		<link rel="stylesheet" href="<?=base_url($css)?>" type="text/css" media="all" charset="utf-8"/>
+	<?php endif; ?>
+	
 	<style>
 		body { margin:0; padding:0; background: #000;}
 	    #galleria{ width: 100%; height: 500px; margin: 0 auto; }
@@ -105,14 +110,19 @@
 	</style>
 	
 	<div id="galleria">
-		<?php foreach ($gallery_img as $image): ?>
-			<a href="<?=base_url($image->full_size)?>">
-				<img
-					<? if($image->title) echo 'data-title="'.$image->title.'"' ?>
-					<? if($image->descr) echo 'data-description="'.$image->description.'"' ?>
-					src="<?=base_url($image->thumb)?>"
-				/>
-			</a>
-		<?php endforeach ?>
+		<?php if (count($gallery->images) > 0): ?>
+			<?php foreach ($gallery->images as $image): ?>
+				<a href="<?=base_url($image->full_size)?>">
+					<img
+						<?php if($image->title) echo "data-title=\"{$image->title}\"" ?>
+						<?php if($image->descr) echo "data-description=\"{$image->description}\"" ?>
+						src="<?=base_url($image->thumb)?>"
+					/>
+				</a>
+			<?php endforeach ?>
+		<?php else: ?>
+			<p>Nessuna immagine ancora caricata in questa galleria.</p>
+		<?php endif ?>
+	</div>
 </body>
 </html>

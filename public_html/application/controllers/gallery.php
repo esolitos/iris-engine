@@ -20,10 +20,13 @@ class Gallery extends CI_Controller
 	{
 		if($w_id)
 		{
+			$this->view_data['website'] = $this->websites_model->get_info($w_id);
 			$site_galleries = $this->gallery_model->get_galleries($w_id);
 			
 			if($site_galleries['success'])
 			{
+				$this->view_data['site_galleries'] = array();
+				
 				foreach($site_galleries['data'] as $gall)
 				{
 					$gallery = $this->gallery_model->get_gallery_images($gall->id);
@@ -53,10 +56,10 @@ class Gallery extends CI_Controller
 		if($g_id)
 		{
 			$this->view_data['start_index'] = $start_from;
-			$gallery = $this->gallery_model->get_gallery_images($g_id);
+			$gallery = $this->gallery_model->load_gallery($g_id);
 
 			if($gallery['success'])
-				$this->view_data['gallery_img'] = $gallery['data'];
+				$this->view_data['gallery'] = $gallery['data'];
 			else
 				$this->view_data['error'] = $this->lang->line($gallery['error']);
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>test elenco</title>
+	<title>Gallerie Fotografiche | <?=$website->website_name?></title>
 	<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -43,7 +43,11 @@
 	</script>
 	
 	<link rel="stylesheet" href="<?=base_url("public/bootstrap/css/bootstrap.min.css")?>" type="text/css" media="screen" charset="utf-8">
-
+	
+	<?php if(isset($css) AND $css):?>
+		<link rel="stylesheet" href="<?=base_url($css)?>" type="text/css" media="all" charset="utf-8"/>
+	<?php endif; ?>
+	
 	<style type="text/css" media="screen">
 		.modal {
 			top: 10%;
@@ -67,22 +71,26 @@
 				<?=$error?>
 			<?php endif ?>
 		</div>
-		<div id="galleries">
-			<?php foreach ($site_galleries as $name => $gallery): ?>
-				<div class="well">
-					<h2><?=$name?></h2>
-					<?php if (count($gallery)): ?>
-						<?php foreach ($gallery as $index => $image): ?>
-							<a href="<?=base_url("gallery/single/$image->gallery_id/$index")?>" class="modal-ajax-trigger">
-								<img src="<?=base_url($image->thumb)?>"/>
-							</a>
-						<?php endforeach ?>
-					<?php else: ?>
-						<p>Non ci sono immagini disponibili per questa galleria.</p>
-					<?php endif ?>
-				</div>
-			<?php endforeach ?>
-		</div>
+		<?php if (count($site_galleries) <= 0): ?>
+			<p>Nessuna galleria disponibile per <?=$website->website_name?>.</p>
+		<?php else: ?>
+			<div id="galleries">
+				<?php foreach ($site_galleries as $name => $gallery): ?>
+					<div class="well">
+						<h2><?=$name?></h2>
+						<?php if (count($gallery)): ?>
+							<?php foreach ($gallery as $index => $image): ?>
+								<a href="<?=base_url("gallery/single/$image->gallery_id/$index")?>" class="modal-ajax-trigger">
+									<img src="<?=base_url($image->thumb)?>"/>
+								</a>
+							<?php endforeach ?>
+						<?php else: ?>
+							<p>Nessuna immagine ancora caricata in questa galleria.</p>
+						<?php endif ?>
+					</div>
+				<?php endforeach ?>
+			</div>
+		<?php endif // $galleries > 0 ?>
 	</div>
 	
 	<? if(DEBUG): ?>

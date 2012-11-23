@@ -14,7 +14,7 @@ class User extends CI_Controller
 	
 	function index()
 	{
-		
+		show_error("Accesso negato.", '403');
 	}
 	
 	function password($action='lost', $u_id=FALSE)

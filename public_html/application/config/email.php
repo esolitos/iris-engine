@@ -5,7 +5,6 @@ $config = array();
 
 switch (TRUE) {
 
-	case (strstr($_SERVER['HTTP_HOST'],'dev')):
 	case (strstr($_SERVER['HTTP_HOST'],'esolitos.com')):
 		$config = array(
 			'useragent'		=>	'irislogin',
@@ -17,7 +16,7 @@ switch (TRUE) {
 		break;
 
 
-
+	case (strstr($_SERVER['HTTP_HOST'],'dev')):
 	case (strstr($_SERVER['HTTP_HOST'],'test')):
 	default:
 		$config = Array(

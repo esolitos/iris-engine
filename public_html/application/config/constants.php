@@ -46,11 +46,12 @@ define('NEWSLETTER_MAX_TEST', 2);
 
 // Defaults Values
 define('IRIS_MAIL', 'iris@irislogin.it');
-define('IRIS_MAIL_SUPPORT', 'supporto@irislogin.it');
-define('IRIS_MAIL_TECH', 'tecnici@irislogin.it');
+define('IRIS_MAIL_SUPPORT', 'iris@irislogin.it');
+define('IRIS_MAIL_TECH', 'iris@irislogin.it');
 define('ENGINE_MAIL', 'engine@irislogin.it');
 
 define('DEFAUT_PASSWORD', 'IRISLOGIN-welcome-pass');
+define('STYLE_DEFAULT_FILE', "/public/css/defaults/services-style.min.css");
 
 // SERVER Path
 define('PATH_SRV_UPLOAD', FCPATH.'public/upload/');

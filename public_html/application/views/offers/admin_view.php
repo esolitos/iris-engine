@@ -321,13 +321,13 @@ $(document).ready(function(){
 							<strong>Attenzione</strong>: ti consigliamo di verificare sempre l'effetto che le modifiche che apporterai avranno sul tuo sito. <br>
 							Le modifiche <em>si applicheranno a tutte le inserzioni</em> che hai inserito attraverso il modulo offerte, ma non ad altre parti sito.<br>
 						</p>
-						<?php echo form_open_multipart('admin/settings/style/1',
+						<?php echo form_open_multipart('admin/settings/style/'.SERVICE_ID_OFFERS,
 														array('class' => 'form-inline', 'id' => 'form-add-style'),
 														array('from'=>"admin/offers")); ?>
 							<input type="submit" name="submit" value="Carica nuovo File" class="btn btn-success">
 							<input class="input-file" id="css_file" name="css_file" type="file"/>
-							<?php if (isset($css_file) AND $css_file): ?>
-									<a class="btn btn-primary" href="<?=$css_file?>" target="_BLANK">Visualizza/Scarica</a>&nbsp;
+							<?php if (isset($css_file) AND $css_file != STYLE_DEFAULT_FILE): ?>
+									<a class="btn btn-primary" href="<?=base_url($css_file)?>" target="_BLANK">Visualizza/Scarica</a>&nbsp;
 									<a class="btn btn-warning" href="settings/style/<?=SERVICE_ID_OFFERS?>/remove?from=admin/offers">Elimina CSS</a>
 							<?php endif ?>
 						</form>

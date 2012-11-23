@@ -30,9 +30,9 @@ switch (TRUE) {
 
 // Local DEV
 $db['dev']['hostname'] = 'localhost';
-$db['dev']['username'] = 'iris_offerEngine';
+$db['dev']['username'] = 'irislogin';
 $db['dev']['password'] = '1r1s_offer';
-$db['dev']['database'] = 'iris_offerEngine';
+$db['dev']['database'] = 'irislogin_dev';
 $db['dev']['dbdriver'] = 'mysql';
 $db['dev']['dbprefix'] = '';
 $db['dev']['pconnect'] = TRUE;
