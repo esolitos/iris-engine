@@ -189,7 +189,7 @@ $(document).ready(function(){
 								<label class="control-label" for="offer_image">Immagine Offerta</label>
 								<div class="controls">
 									<input class="input-file" id="offer_image" name="offer_image" type="file">
-									<span class="help-inline"><em>(Opzionale)</em> Seleziona e carica un immagine relativa all'offerta.</span>
+									<span class="help-inline"><em>(Opzionale)</em> Seleziona e carica un immagine relativa all'offerta. <em>(Massimo: <?php echo(UPLOAD_MAX_SIZE / 1024)?>MB)</em></span>
 								</div>
 							</div>
 							

@@ -43,6 +43,9 @@ define('IS_EXPIRING_STATUS_DAYS', 45);
 define('NEWSLETTER_MAX_TEST_MAILS', 3);
 define('NEWSLETTER_MAX_TEST', 2);
 
+// Massima dimensione disponibile per l'upload (5MB)
+define('UPLOAD_MAX_SIZE', (1024 * 5));
+
 
 // Defaults Values
 define('IRIS_MAIL', 'iris@irislogin.it');

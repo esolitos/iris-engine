@@ -3,9 +3,7 @@
 
 $config['upload_path']	= PATH_SRV_UPLOAD;
 $config['allowed_types'] = 'gif|jpg|jpeg|png|css';
-$config['max_size']	= 5120;
-$config['max_width'] = '1280';
-$config['max_height'] = '1024';
+$config['max_size']	= UPLOAD_MAX_SIZE;
 $config['overwrite'] = FALSE;
 $config['max_filename'] = '30';
 $config['encrypt_name'] = FALSE;

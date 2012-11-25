@@ -287,7 +287,7 @@ class Offers extends CI_Controller
 		// Loading library "Upload" for the image upload
 		$upload_config['upload_path'] = PATH_SRV_UPLOAD;
 		$upload_config['allowed_types'] = 'jpg|png|gif';
-		$upload_config['max_size'] = '500';			// size in KB
+		$upload_config['max_size'] = UPLOAD_MAX_SIZE;
 		$upload_config['encrypt_name'] = TRUE;
 		
 		$this->load->library('upload', $upload_config);

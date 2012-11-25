@@ -13,7 +13,7 @@
 
 	</script>
 	
-	<h2> Mofifica dell'offerta:<br><small class="offset1">"<?=$offer->offer_title?>"<small></h2>
+	<h2> Mofifica dell'offerta:</h2>
 
 	<?if($error):?>
 		<span class="alert alert-error"><?=$error?></span>
@@ -28,6 +28,7 @@
 		<?php echo form_open_multipart('admin/offers/edit/save', array('class' => 'form-horizontal clearfix', 'id' => 'form-edit-offer'), $form_edit_hidden); ?>
 
 			<fieldset>
+				<legend>"<?=$offer->offer_title?>"</legend>
 				<?php if (validation_errors()): ?>
 					<div class="alert alert-error">
 						<h4 class="alert-heading">Attenzione!</h4>
@@ -108,7 +109,7 @@
 					<label class="control-label" for="offer_image">Cambia Immagine dell'Offerta</label>
 					<div class="controls">
 						<input class="input-file" id="offer_image" name="offer_image" type="file">
-						<span class="help-inline"><em>(Opzionale)</em> Seleziona e carica un immagine relativa all'offerta.</span>
+						<span class="help-inline"><em>(Opzionale)</em> Seleziona e carica un immagine relativa all'offerta. <em>(Massimo: <?php echo(UPLOAD_MAX_SIZE / 1024)?>MB)</em></span>
 					</div>
 				</div>
 			</fieldset>

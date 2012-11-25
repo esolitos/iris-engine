@@ -13,6 +13,7 @@ class Gallery extends CI_Controller
 		$this->load->model('gallery_model');
 		
 		$this->lang->load('error', 'italiano');
+		$this->view_data['options'] = explode(',', $this->input->get('options'));
 	}
 
 	

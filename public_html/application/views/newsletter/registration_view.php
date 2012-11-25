@@ -11,8 +11,9 @@
 			color:red;
 		}
 	</style>
-	<h2>Iscriviti alla Newsletter</h2>
-	<!-- <p>Insert here the form description.</p> -->
+	<?php if ( ! in_array("no-title", $options)): ?>
+		<h2>Iscriviti alla Newsletter</h2>
+	<?php endif ?>
 	
 	<?if($error):?>
 		<div class="alert alert-error">

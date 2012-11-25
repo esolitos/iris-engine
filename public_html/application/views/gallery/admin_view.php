@@ -244,7 +244,7 @@ $(document).ready(function(){
 							</div>
 							
 							<div class="control-group">
-								<label class="control-label" for="image_upload">Aggiungi Immagine</label>
+								<label class="control-label" for="image_upload">Aggiungi Immagine <em>(Massimo: <?php echo(UPLOAD_MAX_SIZE / 1024)?>MB)</em></label>
 								<div class="controls">
 									<img id="loader-icon" src="/public/img/ajax-loader.gif" width="16" height="16" alt="Ajax Loader" style="display:none">
 									

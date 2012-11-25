@@ -49,7 +49,10 @@
 			height:auto;
 		}
 	</style>
-	<h2>Richiedi una Prenotazione</h2>
+
+	<?php if ( ! in_array("no-title", $options)): ?>
+		<h1>Richiedi una Prenotazione</h1>
+	<?php endif ?>
 	
 	<?if($error):?>
 		<p><span class="alert alert-error"><?=$error?></span></p>

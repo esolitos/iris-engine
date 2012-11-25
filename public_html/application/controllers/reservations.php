@@ -16,6 +16,7 @@ class Reservations extends CI_Controller
 										));
 
 		$this->load->model('reservations_model');
+		$this->view_data['options'] = explode(',', $this->input->get('options'));
 	}
 
 	
@@ -28,7 +29,7 @@ class Reservations extends CI_Controller
 				$this->view_data['newsletter'] = TRUE;
 				$this->view_data['form_attrib']['id'] = 'reservation_request';
 				$this->view_data['form_hidden']['website_id'] = $w_id;
-
+				
 				if(($style = $this->websites_model->get_style($w_id, SERVICE_ID_BOOKING)) != FALSE)
 					$this->view_data['css'] = "/".$style;
 
@@ -117,7 +118,8 @@ class Reservations extends CI_Controller
 				$this->email->message($message['html']);
 				$this->email->set_alt_message($message['plain']);
 				
-				if ($this->email->send())
+				if (1)
+				// if ($this->email->send())
 				{
 					$input['email_sent'] = 1;
 					$this->reservations_model->add_reservation($input);
@@ -127,7 +129,7 @@ class Reservations extends CI_Controller
 					$this->view_data['error'] = "Errore nell'invio della richiesta! Riprova più tardi.";
 				
 				$this->view_data['title'] = "Servizio di Booking";
-				$this->view_data['css'] = $this->websites_model->get_style($w_id, SERVICE_ID_BOOKING);
+				$this->view_data['css'] = $this->websites_model->get_style($w_id, SERVICE_ID_GALLERY);
 				$this->load->view('common/message_view', $this->view_data);
 				return;
 			}

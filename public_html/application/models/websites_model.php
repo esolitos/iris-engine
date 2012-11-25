@@ -2,17 +2,23 @@
 
 class Websites_Model extends CI_Model
 {
+	private $result;
 	
 	function __construct()
     {
         // Call the Model constructor
         parent::__construct();
 		$this->load->library('SimpleLoginSecure', '', 'login');
+		$this->load->library('Result');
+
+		$result = new Result();
     }
 	
 	function get_info($id)
 	{
-		return $this->db->get_where(TABLE_WEBSITES, array('website_id' => $id))->row();
+		$out = $this->db->get_where(TABLE_WEBSITES, array('website_id' => $id))->row();
+		
+		return $out;
 	}
 
 	function get_all($complete=FALSE)

@@ -188,7 +188,7 @@ class Gallery extends CI_Controller
 				}
 
 				$upload_config['allowed_types'] = 'jpg|png|jpeg';
-				$upload_config['max_size'] = 2048; //2MB
+				$upload_config['max_size'] = UPLOAD_MAX_SIZE; //2MB
 				$upload_config['encrypt_name'] = TRUE;
 				$this->load->library('upload', $upload_config);
 

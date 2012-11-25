@@ -15,6 +15,7 @@ class Newsletter extends CI_Controller
 			));
 
 		$this->load->model('newsletter_model');
+		$this->view_data['options'] = explode(',', $this->input->get('options'));
 	}
 
 
@@ -53,6 +54,7 @@ class Newsletter extends CI_Controller
 					
 					$this->view_data['title'] = "Conferma Sottoscrizione";
 					$this->view_data['css'] = $this->websites_model->get_style($w_id, SERVICE_ID_BOOKING);
+
 					$this->load->view('common/message_view', $this->view_data);
 				}
 			}

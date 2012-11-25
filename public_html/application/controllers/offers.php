@@ -16,6 +16,7 @@ class Offers extends CI_Controller
 		$this->view_data['css'] = FALSE;
 		$this->view_data['is_admin'] = FALSE;
 		$this->view_data['user'] = $this->session->all_userdata();
+		$this->view_data['options'] = explode(',', $this->input->get('options'));
 	}
 
 	public function index($w_id=FALSE)
@@ -25,7 +26,6 @@ class Offers extends CI_Controller
 			$offers = $this->offers_model->get_offers($w_id);
 			$this->view_data['offers'] = ($offers['status']) ? $offers['result'] : FALSE;
 			$this->view_data['special_img'] = $this->websites_model->get_special_img($w_id);
-			$this->view_data['options'] = explode(',', $this->input->get('options'));	
 
 			if(($style = $this->websites_model->get_style($w_id, SERVICE_ID_OFFERS)) != FALSE)
 				$this->view_data['css'] = $style;
@@ -58,7 +58,6 @@ class Offers extends CI_Controller
 			$this->view_data['custom_style'] = $this->settings_model->getOptionArray($offer_data['result']->website_id, SERVICE_ID_OFFERS, array('text_color', 'title_color', 'bg_color'));
 
 			$this->view_data['return'] = $this->input->get('return');
-			$this->view_data['options'] = explode(',', $this->input->get('options'));
 			$this->view_data['special_img'] = $this->websites_model->get_special_img($offer_data['result']->website_id);
 				
 			
