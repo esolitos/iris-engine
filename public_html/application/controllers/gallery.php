@@ -60,12 +60,14 @@ class Gallery extends CI_Controller
 		{
 			$this->view_data['start_index'] = $start_from;
 			$gallery = $this->gallery_model->load_gallery($g_id);
-		
-			if(($style = $this->websites_model->get_style($gallery->website_id, SERVICE_ID_GALLERY)) != FALSE)
-				$this->view_data['css'] = $style;
 
 			if($gallery['success'])
+			{
 				$this->view_data['gallery'] = $gallery['data'];
+
+				if(($style = $this->websites_model->get_style($gallery['data']->website_id, SERVICE_ID_GALLERY)) != FALSE)
+					$this->view_data['css'] = $style;
+			}	
 			else
 				$this->view_data['error'] = $this->lang->line($gallery['error']);
 

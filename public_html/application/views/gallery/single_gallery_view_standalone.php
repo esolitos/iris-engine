@@ -8,60 +8,12 @@
 	<![endif]-->
 	
 	<script src="<?=base_url("public/js/jquery.js")?>" type="text/javascript" charset="utf-8"></script>
-	<script src="<?=base_url("public/js/jquery.controls.js")?>" type="text/javascript" charset="utf-8"></script>
-	<script src="<?=base_url("public/js/jquery.form.js")?>" type="text/javascript" charset="utf-8"></script>
-	<script src="<?=base_url("public/js/jquery.dialog2.js")?>" type="text/javascript" charset="utf-8"></script>
-	<script src="<?=base_url("public/js/jquery.dialog2.helpers.js")?>" type="text/javascript" charset="utf-8"></script>
-
+	<script src="<?=base_url("public/js/keydown.js")?>" type="text/javascript" charset="utf-8"></script>
 	<script src="<?=base_url("public/js/galleria/galleria-1.2.8.min.js")?>" type="text/javascript" charset="utf-8"></script>
-
-	
-	<script type="text/javascript" charset="utf-8">
-	jQuery(document).ready(function(){
-		
-		Galleria.loadTheme('<?=base_url("public/js/galleria/themes/classic/galleria.classic.min.js");?>');
-		
-		$(".modal-ajax-trigger").live( 'click', function(event) {
-			event.preventDefault();
-
-			var href = $(this).attr("href");
-
-	        $('<div/>').appendTo("body").dialog2({
-	            content: href, 
-	            id: "modal-ajax-landing-data",
-	
-				showCloseHandle: false,
-				closeOnEscape: true,
-	        	closeOnOverlayClick: true,
-				removeOnClose: true,
-				
-				initialLoadText: "Caricamento in corso..."
-	        }).dialog2("removeButton", "Cancel");
-	    });	
-	});
-	</script>
-	
-	<link rel="stylesheet" href="<?=base_url("public/bootstrap/css/bootstrap.min.css")?>" type="text/css" media="screen" charset="utf-8">
-
-	<style type="text/css" media="screen">
-		.modal {
-			top: 10%;
-			width: 800px;
-			margin: 0 0 0 -400px; /* -1 * (width / 2) */
-		}
-		.modal > .modal-body {
-			max-height:100%;
-			height:100%;
-		}
-		.modal > .modal-header,
-		.modal > .modal-footer {
-			display:none;
-		}
-	</style>
-	
 </head>
 <body>
 	<script type="text/javascript" charset="utf-8">
+		Galleria.loadTheme('<?=base_url("public/js/galleria/themes/classic/galleria.classic.min.js");?>');
 		jQuery().ready(function(){
 			
 			var pause_ms = 2500;
@@ -89,17 +41,8 @@
 			});
 
 			Galleria.run('#galleria');
-		
-			// $("#galleria").live('mousehover', function(){
-			// 	$("#galleria").data('galleria').pause();
-			// });
-			// $("#galleria").mouseout(function(){
-			// 	this.data('galleria').play(500);
-			// });
 		});
 	</script>
-	
-	<link rel="stylesheet" href="<?=base_url($css)?>" type="text/css" media="all" charset="utf-8"/>
 	
 	<style>
 		body { margin:0; padding:0; background: #000;}

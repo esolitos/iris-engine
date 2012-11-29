@@ -7,38 +7,29 @@
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	
-
+	<base target="_parent" />
 	<script src="<?=base_url("public/js/jquery.js")?>" type="text/javascript" charset="utf-8"></script>
-	<script src="<?=base_url("public/js/jquery.controls.js")?>" type="text/javascript" charset="utf-8"></script>
-	<script src="<?=base_url("public/js/jquery.form.js")?>" type="text/javascript" charset="utf-8"></script>
-	<script src="<?=base_url("public/js/jquery.dialog2.js")?>" type="text/javascript" charset="utf-8"></script>
-	<script src="<?=base_url("public/js/jquery.dialog2.helpers.js")?>" type="text/javascript" charset="utf-8"></script>
-
-	<script src="<?=base_url("public/js/galleria/galleria-1.2.8.min.js")?>" type="text/javascript" charset="utf-8"></script>
+	<script src="<?=base_url("public/js/keydown.js")?>" type="text/javascript" charset="utf-8"></script>
 
 	
 	<script type="text/javascript" charset="utf-8">
 	$(document).ready(function(){
 		
-		Galleria.loadTheme('<?=base_url("public/js/galleria/themes/classic/galleria.classic.min.js");?>');
-		
 		$(".modal-ajax-trigger").live( 'click', function(event) {
 			event.preventDefault();
+			element = $(this);
 
-			var href = $(this).attr("href");
-
-	        $('<div/>').appendTo("body").dialog2({
-	            content: href, 
-	            id: "modal-ajax-landing-data",
-	
-				showCloseHandle: false,
-				closeOnEscape: true,
-	        	closeOnOverlayClick: true,
-				removeOnClose: true,
+			var href = element.attr("href");
+			var gallery_id = element.attr("data-gallery-id");
 				
-				initialLoadText: "Caricamento in corso..."
-	        }).dialog2("removeButton", "Cancel");
-	    });	
+			var message = {
+			    url: href,
+				gid: gallery_id, 
+				id: "modal-ajax-landing-data",
+			};
+			
+			window.parent.postMessage(JSON.stringify(message),'*');
+	    });
 	});
 	</script>
 	
@@ -76,7 +67,7 @@
 						<h2><?=$name?></h2>
 						<?php if (count($gallery)): ?>
 							<?php foreach ($gallery as $index => $image): ?>
-								<a href="<?=base_url("gallery/single/$image->gallery_id/$index")?>" class="modal-ajax-trigger">
+								<a href="<?=base_url("gallery/single/$image->gallery_id/$index")?>" data-gallery-id="<?=$image->gallery_id?>" class="modal-ajax-trigger">
 									<img src="<?=base_url($image->thumb)?>"/>
 								</a>
 							<?php endforeach ?>
