@@ -63,6 +63,10 @@ function onMessage (event) {
 }
 
 jQuery().ready(function(){
+	if(getIE_Version() < 8 ){
+		window.alert("Versions 'Internet Explorer' prior to 8 are not supported by this service. Please update your browser for a better navigation expirience.");
+	}
+	
 	// Create the wrapper
 	wrapper_element = $('<div/>').attr({
 		id: gallery_iframe_wrapper_id,
@@ -78,13 +82,6 @@ jQuery().ready(function(){
 	close_icon.bind('click', function(){
 		hide_gallery();
 	});
-	
-	if(getIE_Version() > -1 ){
-		script = jQuery("<script>").attr({
-			src: "http:///irislogin.it/public/js/JSON.js",
-			type: "text/javascript"
-		}).appendTo("body");	
-	}
 	
 	// Finally add the listenbers
 	if (window.attachEvent)
