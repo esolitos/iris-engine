@@ -215,10 +215,18 @@ if( ! function_exists('init_viewdata') )
 		return json_decode($result);
 	}
 	
-	function mkdir_if($dirname='')
+	function mkdir_if($dirname='', $perm = '0775')
 	{
 		if ( ! file_exists($dirname))
-			return mkdir($dirname, 0775, TRUE);
+			return mkdir($dirname, $perm, TRUE);
+		
+		return TRUE;
+	}
+	
+	function unlink_if($filename='')
+	{
+		if (file_exists($filename))
+			return unlink($filename);
 		
 		return TRUE;
 	}

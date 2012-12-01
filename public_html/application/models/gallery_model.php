@@ -230,4 +230,52 @@ class Gallery_Model extends CI_Model
 				);
 		
 	}
+	
+	function check_space($id, $type = 'gallery')
+	{
+		switch ($type) {
+			case 'image':
+			case 'images':
+				$this->db->where('gallery_id', $id)->from(TABLE_GALLERY_IMAGES);
+				$num_images = $this->db->count_all_results();
+
+				if($num_images >= GALLERY_MAX_GALLERY_IMAGES)
+				{
+					return array(
+						'success' => FALSE,
+						'total' => $this->db->affected_rows(),
+						'error' => "SRVC-GALL-ADDIMG-LIMIT",
+						);
+				}
+				else
+				{
+					return array(
+						'success' => TRUE,
+						'total' => $num_images,
+						);
+				}
+				break;
+
+			case 'gallery':
+			default:
+				$this->db->where('website_id', $id)->from(TABLE_GALLERY);
+				$num_galleries = $this->db->count_all_results();
+				if($num_galleries >= GALLERY_MAX_GALLERIES)
+				{
+					return array(
+						'success' => FALSE,
+						'total' => $num_galleries,
+						'error' => "SRVC-GALL-ADD-LIMIT",
+						);
+				}
+				else
+				{
+					return array(
+						'success' => TRUE,
+						'total' => $num_galleries,
+						);
+				}
+				break;
+		}
+	}
 }

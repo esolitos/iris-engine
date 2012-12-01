@@ -20,7 +20,9 @@ class Gallery extends CI_Controller
 
 		$this->view_data['user'] = $this->session->all_userdata();
 		
-		$this->load->model('gallery_model');		
+		$this->load->model('gallery_model');
+		$this->lang->load('error', 'italiano');	
+		$this->lang->load('messages', 'italiano');	
 	}
 		
 	function index()
@@ -75,6 +77,14 @@ class Gallery extends CI_Controller
 	{
 		if(($g_title = $this->input->post('gallery_title')) != FALSE)
 		{
+			$avaibility = $this->gallery_model->check_space($this->input->post("website_id"), 'gallery');
+			if( ! $avaibility['success'])
+			{
+				$this->view_data['error'] = $this->lang->line($avaibility['error']);
+				$this->index();
+				return FALSE;
+			}
+
 			$images = $this->input->post('images');
 			$gallery = $this->gallery_model->add_gallery($this->view_data['user']['user_website'], $g_title);
 			if($gallery['success'])
@@ -83,37 +93,40 @@ class Gallery extends CI_Controller
 				$gallery_path = PATH_SRV_GALLERY.$g_id.'/';
 				$tmp_path = PATH_SRV_GALLERY.'TEMP/';
 				
-				if(mkdir($gallery_path, 0775))
+				if(mkdir_if($gallery_path))
 				{
-					foreach ($images as $img)
+					if($images)
 					{
-						$img_file = pathinfo($img);
-						$img_thumb = $img_file['filename']."-SMALL.".$img_file['extension'];
+						foreach ($images as $img)
+						{
+							$img_file = pathinfo($img);
+							$img_thumb = $img_file['filename']."-SMALL.".$img_file['extension'];
 						
-						if( ! rename($tmp_path.$img, $gallery_path.$img) OR ! rename($tmp_path.$img_thumb, $gallery_path.$img_thumb))
-						{
-							$this->view_data['error'] = "Alcune immagini non sono state caricate correttamente. Controlla che la gallery funzioni correttamente.";
-							break;
-						}
-						else
-						{
-							$result = $this->gallery_model->add_image($g_id, $img, $img_thumb);
-
-							if( ! $result['success'] )
+							if( ! rename($tmp_path.$img, $gallery_path.$img) OR ! rename($tmp_path.$img_thumb, $gallery_path.$img_thumb))
 							{
-								$this->view_data['error'] = $this->lang->line($result['error']);
+								$this->view_data['error'] = "Alcune immagini non sono state caricate correttamente. Controlla che la gallery funzioni correttamente.";
 								break;
 							}
-						}	
-					} //foreach img	
+							else
+							{
+								$result = $this->gallery_model->add_image($g_id, $img, $img_thumb);
+
+								if( ! $result['success'] )
+								{
+									$this->view_data['error'] = $this->lang->line($result['error']);
+									break;
+								}
+							}	
+						} //foreach img
+					}
 					
-					$this->view_data['message'] = "Galleria Aggiunta!";
+					$this->view_data['message'] = $this->lang->line("SRVC-GALLERY-CREATE-OK");
 					$this->index();
 					return;
 				}
 			}
 
-				$this->view_data['error'] = "Impossibile creare una galleria.";
+				$this->view_data['error'] = $this->lang->line("SRVC-GALLERY-CREATE-ERR");
 				$this->index();
 		}
 		else
@@ -126,13 +139,13 @@ class Gallery extends CI_Controller
 		
 		foreach($gallery_images['data'] as $image)
 		{
-			unlink($image->full_size);
-			unlink($image->thumb);
+			unlink_if($image->full_size);
+			unlink_if($image->thumb);
 			$this->gallery_model->del_image($image->id);
 		}
 		$this->gallery_model->del_gallery($g_id);
 		
-		$this->view_data['message'] = "Galleria Rimossa Correttamente";
+		$this->view_data['message'] = $this->lang->line("SRVC-GALLERY-REMOVE-OK");
 		$this->index();
 		
 	}
@@ -168,19 +181,38 @@ class Gallery extends CI_Controller
 			$file_element_name = 'image_upload';
 
 			if ( ! ($g_id = $this->input->post('gallery_id')) )
-				$result['error'] .= "Gallery ID not valid.\n";
-
+				$result['error'] .= $this->lang->line('SRVC-GALLERY-UPLOAD-NO-GID');
 
 			if (!$result['error'])
 			{
 				$gall_id = $this->input->post('gallery_id');
 				if($gall_id == 'new')
 				{
+					$avaibility = $this->gallery_model->check_space($this->input->post("website_id"), 'gallery');
+					if( ! $avaibility['success'])
+					{
+						echo json_encode(array(
+							'error'=> $this->lang->line($avaibility['error'])
+							)
+						);
+						return FALSE;
+					}
+					
 					$upload_config['upload_path'] = PATH_SRV_GALLERY."TEMP/";
 					$result['thumb_path'] =  PATH_WEB_GALLERY."TEMP/";
 				}
 				else
 				{
+					$avaibility = $this->gallery_model->check_space($g_id, 'image');
+					if( ! $avaibility['success'] )
+					{
+						echo json_encode(array(
+							'error'=> $this->lang->line($avaibility['error'])
+							)
+						);
+						return FALSE;
+					}
+
 					mkdir_if(PATH_SRV_GALLERY."$g_id/");
 
 					$upload_config['upload_path'] = PATH_SRV_GALLERY."$g_id/";
@@ -254,7 +286,7 @@ class Gallery extends CI_Controller
 						if($db_insert['success'])
 							$result['img_id'] = $db_insert['data']['image_id'];
 						else
-							$result['error'] .= "Impossibile aggiungere immagine al database";
+							$result['error'] .= $this->lang->line("SRVC-GALL-ADDIMG-DB");
 					}
 				}
 

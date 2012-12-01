@@ -67,8 +67,13 @@ $(document).ready(function(){
 				$("#loader-icon").hide();
 				$('#fileupload').show();
 				
-				console.log(e);
-				alert("Errore nell\'Upload!");
+				<?php if(DEBUG): ?>
+					console.log(e);
+					console.log(status);
+					console.log(data);
+				<?php endif; ?>
+				
+				alert("Errore generico nell\'upload!");
 			}
 		});
 		
@@ -218,7 +223,7 @@ $(document).ready(function(){
 				
 				
 				<div class="tab-pane fade" id="gallery-add">
-					<?php echo form_open('admin/gallery/add', array('class' => 'form-horizontal', 'id'=>'gallery-add'), $form_hidden); ?>
+					<?php echo form_open('admin/gallery/add', array('class' => 'form-horizontal', 'id'=>'gallery-add'), array('website_id' => $website['info']->website_id)); ?>
 						<fieldset>
 							<legend>Aggiungi una Gallery</legend>
 						</fieldset>	

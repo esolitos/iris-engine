@@ -43,6 +43,10 @@ define('IS_EXPIRING_STATUS_DAYS', 45);
 define('NEWSLETTER_MAX_TEST_MAILS', 3);
 define('NEWSLETTER_MAX_TEST', 2);
 
+// Limiti impostazioni gallery
+define('GALLERY_MAX_GALLERIES', 10);
+define('GALLERY_MAX_GALLERY_IMAGES', 15);
+
 // Massima dimensione disponibile per l'upload (5MB)
 define('UPLOAD_MAX_SIZE', (1024 * 5));
 
