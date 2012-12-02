@@ -112,14 +112,14 @@ class Reservations extends CI_Controller
 				$message = $this->_build_mail($input);
 
 				$this->email->to($w_data['info']->website_email);
+				$this->email->bcc(IRIS_MAIL); 
 				$this->email->from(ENGINE_MAIL, 'IrisLogin - Servizio Booking');
 				$this->email->reply_to($input['email'], "{$input['name']} {$input['surname']}");
 				$this->email->subject("Richiesta di prenotazione di {$input['name']} {$input['surname']} - IrisLogin");
 				$this->email->message($message['html']);
 				$this->email->set_alt_message($message['plain']);
-				
-				if (1)
-				// if ($this->email->send())
+
+				if ($this->email->send())
 				{
 					$input['email_sent'] = 1;
 					$this->reservations_model->add_reservation($input);

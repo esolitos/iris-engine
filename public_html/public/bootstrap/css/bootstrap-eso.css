@@ -127,6 +127,10 @@ ol.controls li {
 	color:#997;
 }
 
+.top-menu li.last .dropdown-menu a:hover {
+	color: white;
+}
+
 .top-menu li.disabled a,
 .top-menu li.disabled a:active,
 .top-menu li.disabled a:hover {

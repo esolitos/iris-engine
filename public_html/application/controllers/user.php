@@ -28,6 +28,10 @@ class User extends CI_Controller
 				$this->_resetPWD($u_id);
 				break;
 			
+			case 'update':
+				$this->_updatePWD($u_id);
+				break;
+			
 			default:
 				show_404();
 				break;
@@ -90,6 +94,7 @@ class User extends CI_Controller
 						$this->load->library('email');
 						
 						$this->email->to($user_data['info']->email);
+						$this->email->bcc(IRIS_MAIL); 
 						$this->email->from(IRIS_MAIL_TECH, 'IrisLogin');
 						$this->email->subject("Nuova password per IRISLogin");
 						$this->email->message("<h1>Nuova Password di Accesso</h1>".
@@ -127,7 +132,22 @@ class User extends CI_Controller
 					));
 		}
 	}
-	
+
+	private function _updatePWD($user_id)
+	{
+		if( $this->input->post('submit') !== FALSE )
+		{
+			
+		}
+		else
+		{
+			output(array(
+					'header' => init_headdata(),
+					'footer' => TRUE,
+					'users/password_update_view' => $this->view_data
+					));
+		}
+	}
 }
 
 

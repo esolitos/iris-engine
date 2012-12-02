@@ -69,7 +69,16 @@
 
 						<?if($user['logged_in']):?>
 							<li class="divider-vertical"></li>
-							<li class="last"><?=anchor('logout', "Logout")?></li>
+							<li class="last dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									<?=$user['username']?>
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><?=anchor('user/password/update', "Cambia Password")?></li>
+									<li><?=anchor('logout', "Logout")?></li>
+								</ul>
+							</li>
 						<?else:?>
 							<li class="active"><?=anchor('admin/login', "Log In")?></li>
 						<?endif;?>
