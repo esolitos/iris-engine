@@ -55,11 +55,11 @@
 
 				<?php elseif($website['services_list'][SERVICE_NAME_OFFERS] < IS_EXPIRING_STATUS_DAYS): ?>
 					STATUS: Rimangono solo <strong><?=$website['services_list'][SERVICE_NAME_OFFERS]?> giorni.</strong><br>
-					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Piu Infornazioni)</a>
+					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Più Informazioni)</a>
 
 				<?php else: ?>
 					STATUS: Attivo <em>(Scade: <?=outputMyDate($website['services'][SERVICE_NAME_OFFERS]->service_expire)?>)</em><br>
-					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Piu Infornazioni)</a>
+					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Più Informazioni)</a>
 
 				<?php endif; ?>
 
@@ -127,11 +127,11 @@
 
 				<?php elseif($website['services_list'][SERVICE_NAME_NEWSLETTER] < IS_EXPIRING_STATUS_DAYS): ?>
 					STATUS: Rimangono solo <strong><?=$website['services_list'][SERVICE_NAME_NEWSLETTER]?> giorni.</strong><br>
-					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Piu Infornazioni)</a>
+					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Più Informazioni)</a>
 
 				<?php else: ?>
 					STATUS: Attivo <em>(Scade: <?=outputMyDate($website['services'][SERVICE_NAME_NEWSLETTER]->service_expire)?>)</em><br>
-					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Piu Infornazioni)</a>
+					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Più Informazioni)</a>
 
 				<?php endif; ?>
 
@@ -200,11 +200,11 @@
 
 				<?php elseif($website['services_list'][SERVICE_NAME_BOOKING] < IS_EXPIRING_STATUS_DAYS): ?>
 					STATUS: Rimangono solo <strong><?=$website['services_list'][SERVICE_NAME_BOOKING]?> giorni.</strong><br>
-					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Piu Infornazioni)</a>
+					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Più Informazioni)</a>
 
 				<?php else: ?>
 					STATUS: Attivo <em>(Scade: <?=outputMyDate($website['services'][SERVICE_NAME_BOOKING]->service_expire)?>)</em><br>
-					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Piu Infornazioni)</a>
+					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Più Informazioni)</a>
 
 				<?php endif; ?>
 
@@ -274,11 +274,11 @@
 
 				<?php elseif($website['services_list'][SERVICE_NAME_GALLERY] < IS_EXPIRING_STATUS_DAYS): ?>
 					STATUS: Rimangono solo <strong><?=$website['services_list'][SERVICE_NAME_GALLERY]?> giorni.</strong><br>
-					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Piu Infornazioni)</a>
+					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Più Informazioni)</a>
 
 				<?php else: ?>
 					STATUS: Attivo <em>(Scade: <?=outputMyDate($website['services'][SERVICE_NAME_GALLERY]->service_expire)?>)</em><br>
-					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Piu Infornazioni)</a>
+					<a class="auto-renew" rel="popover" href="#">Rinnovo Automatico Attivo (Più Informazioni)</a>
 
 				<?php endif; ?>
 
@@ -295,7 +295,7 @@
 					?>
 					<a href="<?=$link?>">
 						<span>
-							<strong>Agiungi una Gallery</strong>
+							<strong>Aggiungi una Gallery</strong>
 							<em>Clicca qui per creare una nuova galleria di immagini.</em>
 						</span>
 					</a>
@@ -319,7 +319,7 @@
 				<img src="/public/img/info.png" width="25" height="56" alt="Info">
 				<p>Con il servizio <em>Gallery</em> avrai la possibilità di inserire le tue gallerie fotografiche in una pagina dedicata. 
 					Potrai modificarle, eliminarle o aggiungerne di nuove. Potrai organizzarle per temi, modificandone i titoli. 
-					Sul tuo sito appariranno le anteprime delle immagini, che che potranno essere visualizzate in modalità fullscreen.</p>
+					Sul tuo sito appariranno le anteprime delle immagini, che che potranno essere visualizzate in modalità full-screen.</p>
 			</div>
 		</div>
 	</div>
