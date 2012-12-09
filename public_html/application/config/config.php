@@ -176,7 +176,7 @@ $config['global_xss_filtering'] = FALSE;
 | Cross Site Request Forgery
 |--------------------------------------------------------------------------
 */
-$config['csrf_protection'] = TRUE;
+$config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'csrf_token_iris_login';
 $config['csrf_cookie_name'] = 'csrf_cookie_iris_login';
 $config['csrf_expire'] = 3600;
