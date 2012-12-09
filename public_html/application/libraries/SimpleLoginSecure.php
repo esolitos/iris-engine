@@ -191,6 +191,17 @@ class SimpleLoginSecure
 		}	
 
 	}
+	
+	function check_password($user, $pass)
+	{
+		$this->CI =& get_instance();
+		$hasher = new PasswordHash(PHPASS_HASH_STRENGTH, PHPASS_HASH_PORTABLE);
+
+		$this->CI->db->select("pass")->from($this->user_table)->where('username', $user); 
+		$db_pass = $this->CI->db->get()->row()->pass;
+
+		return $hasher->CheckPassword($pass, $db_pass);
+	}
 
 	/**
 	 * Logout user

@@ -21,6 +21,6 @@
 				<div class="well"><span class="alert alert-info"><?=$message?></span></div>
 			<?php endif;?>
 		</div>
-	</div>	
+	</div>
 </body>
 </html>

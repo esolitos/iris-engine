@@ -13,45 +13,48 @@
 			</div>
 		<?endif;?>
 		
-		<?=validation_errors('<div class="alert alert-error">', '</div>')?>
+		<?php if ( ! $update_success): ?>
+			<?=validation_errors('<div class="alert alert-error">', '</div>')?>
 		
-		<?=form_open_multipart(current_url(), array('class' => 'form-inline')); ?>
-			<filedset>
-				<div class="control-group <? if(form_error('old_password')) echo "error";?>">
-					<div class="controls">
-						<input type="passowrd" name="old_password" placeholder="Vecchia Password" value="<?=set_value('old_password')?>"/>
+			<?=form_open(current_url(), array('class' => 'form-inline')); ?>
+				<filedset>
+					<div class="control-group <? if(form_error('old_password')) echo "error";?>">
+						<div class="controls">
+							<input type="password" name="old_password" placeholder="Vecchia Password"/>
+						</div>
 					</div>
-				</div>
-				<br>
+					<br>
 				
-				<div class="control-group <? if(form_error('new_password')) echo "error";?>">
-					<div class="controls">
-						<input type="passowrd" name="new_password" placeholder="Nuova Password" value="<?=set_value('new_password')?>"/>
+					<div class="control-group <? if(form_error('new_password')) echo "error";?>">
+						<div class="controls">
+							<input type="password" name="new_password" placeholder="Nuova Password"/>
+						</div>
 					</div>
-				</div>
 
-				<div class="control-group <? if(form_error('old_password')) echo "error";?>">
-					<div class="controls">
-						<input type="passowrd" name="old_password" placeholder="Verifica Nuova Password" value="<?=set_value('old_password')?>"/>
+					<div class="control-group <? if(form_error('new_password_check')) echo "error";?>">
+						<div class="controls">
+							<input type="password" name="new_password_check" placeholder="Verifica Nuova Password"/>
+						</div>
 					</div>
-				</div>
-				<br>
+					<br>
 
-				<div class="control-group <? if(form_error('email')) echo "error";?>">
-					<div class="controls">
-						<input type="email" name="email" placeholder="eMail" value="<?=set_value('email')?>"/>
+					<div class="control-group <? if(form_error('email')) echo "error";?>">
+						<div class="controls">
+							<input type="email" name="email" placeholder="eMail" value="<?=set_value('email')?>"/>
+						</div>
 					</div>
-				</div>
 
-				<div class="help-block">Inserisci la tua vecchia password, la nuova password (due volte)<br> ed il tuo indirizzo email per modificare la chiave di acesso.</div>
+					<div class="help-block">Inserisci la tua vecchia password, la nuova password (due volte)<br> ed il tuo indirizzo email per modificare la chiave di acesso.</div>
 				
-				<div class="control-group">
-					<div class="controls">
-						<input type="submit" name="submit" class="btn btn-primary" value="Modifica Password &rarr;"/>
+					<div class="control-group">
+						<div class="controls">
+							<input type="submit" name="submit" class="btn btn-primary" value="Modifica Password &rarr;"/>
+						</div>
 					</div>
-				</div>
-			</filedset>
-		</form>
+				</filedset>
+			</form>			
+		<?php endif ?>
+		
 	</div>
 </div>
 

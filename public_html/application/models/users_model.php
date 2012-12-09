@@ -56,9 +56,12 @@ class Users_Model extends CI_Model
 			return array('status' => FALSE, 'err_code' => 3, 'err_descr' => "Errore durante l'aggiunta dell'utente {$username} con email: {$email}");
 	}
 	
-	function login($username, $password)
+	function login($username, $password, $dummy = FALSE)
 	{
-		return $this->login->login($username, $password);
+		if($dummy)
+			return $this->login->check_password($username, $password);
+		else
+			return $this->login->login($username, $password);
 	}
 	
 	function logout()

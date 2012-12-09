@@ -51,7 +51,7 @@
 					</a>
 					<ul class="top-menu nav clearfix <? if(!$user['logged_in']) echo "not-logged"; ?>">
 						<?php if ($user['logged_in']): ?>
-							<li class="first"><?=anchor('admin', "Admin Home")?></li>
+							<li class="first"><?=anchor('admin', "<i class=\"icon-home icon-white\"></i>&nbsp; Home")?></li>
 							<li class="divider-vertical"></li>
 
 							<?php foreach ($website['services'] as $service): ?>
@@ -63,20 +63,20 @@
 							<?php endforeach ?>
 						<?php endif ?>
 
-						<?if($user['logged_in'] && $user['user_id'] == USER_ID_MASTER_ADMIN):?>
-							<li><?=anchor('admin/websites', "Websites")?></li>
-						<?endif;?>
-
 						<?if($user['logged_in']):?>
 							<li class="divider-vertical"></li>
 							<li class="last dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									<i class="icon-user icon-white"></i>&nbsp;
 									<?=$user['username']?>
 									<span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
+									<li><?=anchor('admin/websites', 'Manage Websites')?></li>
 									<li><?=anchor('user/password/update', "Cambia Password")?></li>
 									<li><?=anchor('logout', "Logout")?></li>
+									<?if($user['logged_in'] && $user['user_id'] == USER_ID_MASTER_ADMIN):?>
+									<?endif;?>
 								</ul>
 							</li>
 						<?else:?>

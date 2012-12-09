@@ -133,20 +133,92 @@ class User extends CI_Controller
 		}
 	}
 
-	private function _updatePWD($user_id)
+	private function _updatePWD($user_id = FALSE)
 	{
+		if( ! $this->session->userdata('logged_in'))
+		{
+			redirect("admin/login.html?dest=user/password/update");
+			exit();
+		}
+
+		$this->view_data['user'] = $this->session->all_userdata();
+		$this->view_data['update_success'] = FALSE;
+
+		if($user_id === FALSE)
+			$user_id = $this->session->userdata('user_id');
+	
 		if( $this->input->post('submit') !== FALSE )
 		{
-			
+			$this->form_validation->set_message('required', '%s obbligatorio.');
+			$this->form_validation->set_message('matches', 'Le nuove password non corrispondono.');
+			$this->form_validation->set_message('min_length', '%s deve essere di almeno %d caratteri.');
+			$this->form_validation->set_message('in_database', 'Devi indicare un %s presente nel sistema.');
+
+			$form_rules = array(
+				array(
+					'field' => 'old_password', 
+					'label' => 'Vecchia Password', 
+					'rules' => 'trim|required'
+				),
+				array(
+					'field' => 'new_password', 
+					'label' => 'Nuova Password', 
+					'rules' => 'trim|required'
+					// 'rules' => 'trim|required|min_length[6]'
+				),
+				array(
+					'field' => 'new_password_check', 
+					'label' => 'Password di Controllo', 
+					'rules' => 'trim|required|matches[new_password]'
+					),
+				array(
+					'field' => 'email', 
+					'label' => 'Indirizzo Email', 
+					'rules' => 'trim|required|in_database['.TABLE_USERS.'.email]'
+					)
+				);
+
+			$this->form_validation->set_rules($form_rules);
+
+			if( ! $this->form_validation->run())
+			{
+				output(array(
+						'header' => init_headdata(),
+						'footer' => TRUE,
+						'users/password_update_view' => $this->view_data
+						));
+				return TRUE;
+			}
+			else
+			{
+				if( ($user_data = $this->users->load_user_data($user_id)) === FALSE)
+				{
+					$this->view_data['error'] = "L'utente indicato non è presente nel sistema. Prego ricontrollare i dati inseriti.";
+				}
+				elseif($user_data['info']->email != $this->input->post('email'))
+				{
+					$this->view_data['error'] = "L'indirizzo email inserito non corrisponde a quello indicato in fase di registrazione.";
+				}
+				elseif( $this->users->login($user_data['info']->username, $this->input->post('old_password'), TRUE) == FALSE)
+				{
+					$this->view_data['error'] = "La vecchia password non è corretta. Inserisci nuovametne i dati e riprova.";
+				}
+				else
+				{
+					if( $this->users->update_pwd($user_id, $this->input->post('new_password')) )
+					{
+						$this->view_data['update_success'] = TRUE;
+						$this->view_data['message'] = "La tua password è stata aggiornata con successo. \n<a class=\"btn btn-success\" href=\"/admin\">&larr; Torna alla pagina di amministrazione.</a>";
+					}
+				}	
+			}
 		}
-		else
-		{
-			output(array(
-					'header' => init_headdata(),
-					'footer' => TRUE,
-					'users/password_update_view' => $this->view_data
-					));
-		}
+		
+		output(array(
+				'header' => init_headdata(),
+				'footer' => TRUE,
+				'users/password_update_view' => $this->view_data
+				));
 	}
 }
 

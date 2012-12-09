@@ -30,7 +30,7 @@ switch (TRUE) {
 
 // Local DEV
 $db['dev']['hostname'] = 'localhost';
-$db['dev']['username'] = 'irislogin_dev';
+$db['dev']['username'] = 'irislogin';
 $db['dev']['password'] = '1r1s_offer';
 $db['dev']['database'] = 'irislogin_dev';
 $db['dev']['dbdriver'] = 'mysql';
