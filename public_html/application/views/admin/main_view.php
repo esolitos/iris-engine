@@ -153,17 +153,17 @@
 						</span>
 					</a>
 				</div>
-				<div class="edit">
+				<div class="add-user">
 					<?php 
 						if(isset($website['services_list'][SERVICE_NAME_NEWSLETTER]) AND $website['services_list'][SERVICE_NAME_NEWSLETTER] > 0)
-							$link = base_url("/admin/newsletter.html#news-draft");
+							$link = base_url("/admin/newsletter.html#subscribers-add");
 						else
 							$link = "#";
 					?>
 					<a href="<?=$link?>">
 						<span>
-							<strong>Gestisci Bozze</strong>
-							<em>Clicca qui per modificare, eliminare o inviare una bozza<br>&nbsp;che hai inserito in precedenza e non ancora inviato</em>
+							<strong>Aggiungi iscrizione</strong>
+							<em>Clicca qui per invitare un tuo contatto ad iscriversi alla tua newsletter. </em>
 						</span>
 					</a>
 				</div>

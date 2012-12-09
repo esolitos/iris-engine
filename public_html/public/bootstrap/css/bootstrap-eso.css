@@ -479,6 +479,25 @@ ol.controls li {
 }
 
 
+.service .service-actions .add-user a {
+	background-image:url('/public/img/btn-add-user.png');
+}
+.service .service-actions .add-user a:hover {
+	background-image:url('/public/img/btn-add-user-over.png');
+}
+.service .service-actions .add-user a:active {
+	background-image:url('/public/img/btn-add-user-down.png');
+}
+
+.service.expired #booking-body .service-actions .add-user a,
+.service.expired #booking-body .service-actions .add-user a:visited,
+.service.expired #booking-body .service-actions .add-user a:hover,
+.service.expired #booking-body .service-actions .add-user a:active {
+	background-image:url('/public/img/btn-add-user-disabled.png') !important;
+	
+}
+
+
 .service-body .service-description {
 	right:20px;
 	width:32%;
