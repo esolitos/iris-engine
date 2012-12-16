@@ -170,6 +170,7 @@ $(document).ready(function(){
 				<li id="gallery-add-selector"><a href="#gallery-add" data-toggle="tab">Nuova Gallery</a></li>
 				<li id="gallery-settings-selector"><a href="#gallery-settings" data-toggle="tab">Impostazioni</a></li>
 				<li id="gallery-descr-selector"><a href="#gallery-descr" data-toggle="tab">Maggiorni Informazioni</a></li>
+				<li id="service-html-code-selector"><a href="#service-html-code" data-toggle="tab">Codice Servizio</a></li>
 			</ul> <!-- #tab -->
 
 			<div id="tab-content" class="span10 tab-content">
@@ -289,13 +290,41 @@ $(document).ready(function(){
 
 				
 				<div class="tab-pane fade" id="gallery-descr">
-					<p class="dark">Con il servizio gallery avrai la possibilità di inserire le tue gallerie fotografiche in una pagina dedicata. Potrai modificarle, eliminarle o aggiungerne di nuove.
-					Potrai organizzarle per temi, modificandone i titoli. Sul tuo sito appariranno le anteprime delle immagini, che che potranno essere visualizzate in modalità fullscreen.</p>
+					<h3>Guida all'utilizzo di <em>IrisLogin - Gallery</em></h3>
+					<p class="dark">Con il servizio <strong>Gallery</strong> avrai la possibilità di inserire le tue <strong>gallerie fotografiche in una pagina dedicata</strong>. Potrai modificarle, eliminarle o aggiungerne di nuove. Potrai organizzarle per temi, modificandone i titoli. Sul tuo sito appariranno le anteprime delle immagini, che che potranno essere visualizzate in modalità <em>fullscreen</em>.<br>
+						Potrai caricare fotografie di una <em>dimensione massima di <?php echo(UPLOAD_MAX_SIZE / 1024)?>MB</em>, che corrispondono all'incirca alle fotografie realizzate con macchine fotografiche da 14-16 MegaPixel. Se possiedi una macchina fotografica che realizza file di dimensioni più grandi o se semplicemente vuoi velocizzare i tempi di upload delle fotografie, ti suggeriamo l'utilizzo di uno dei software già preinstallati sul tuo sistema per ridurre sensibilmente le dimensioni della fotografia. Alternativamente puoi utilizzare il software "<strong>Image Resizer per Windows</strong>", scaricabile gratuitamente (vedi Guida).<br>
+	Image Resizer per Windows è un software molto leggero e veloce, consente anche di risparmiare molto tempo. <em>Ricorda che sul web risoluzioni come 800x600 oppure 1024x768 sono più che sufficienti per una visualizzazione di qualità delle immagini</em>.</p>
+					<h4>Installazione ed utilizzo di "Image Resizer per Windows"</h4>
+					<p>
+						<h4>Preparazione</h4>
+						Scaricate il programma di installazione dal seguente indirizzo: <a href="https://imageresizer.codeplex.com/" target="_BLANK">https://imageresizer.codeplex.com/</a>.<br>
+						Una volta terminato il download, dovrete lanciare il file appena scaricato per iniziare la procedura di installazione.<br>
+						<em><strong>NB</strong>: Image Resizer for Windows richiede l'installazione di "Microsoft .NET Framework 4 Client", se non è già presente sul vostro PC, l'installatore lo scaricherà automaticamente, vi basterà dare la conferma quando vi verrà chiesto il consenso per l'installazione.</em><br>
+						Al termine dell'installazione verrà richiesto di riavviare il computer.
+						<h4>Utilizzo</h4>
+						Una volta riavviato il computer, vi basterà cliccare con il tasto destro del mouse sull'immagine da ridimensionare, e dal menù contestuale selezionare la voce "Resize Pictures".<br>
+						Comparirà una piccola finestra con un elenco di misure predefinite, scegliete quella che preferite (la versione "<em>small</em>" va bene nella maggior parte dei casi), dopodiché cliccate il tasto "<em>resize</em>" e il software creerà <u>una copia dell'immagine in versione ridotta</u>.<br>
+						<<em>strong</em>>Attenzione!</strong> Se mette la spunta su "<em>Replace Originals</em>" la foto originale verrà <u>sostituita con quella ridotta</u>, sconsigliamo l'utilizzo di questa opzione.<br>
+
+						Ora avrete l'immagine ridotta pronta per essere inserita sulla vostra gallery, in tempi molto inferiori alle immagini originali.<br>
+						&nbsp;&nbsp;Buon divertimento con le Gallery di IRIS Login!
+					</p>
+				</div>
+				
+				<div class="tab-pane fade" id="service-html-code">
+					<h2>Codice per l'utilizzo del servizio 'Gallery'</h2>
+					<p>Per utilizzare il servizio Gallery fornito da IrisLogin in una qualsiasi pagina è sufficiente utilizzare il seguente codice HTML.</p>
+
+					<pre class="irislogin-service-code prettyprint ">
+&lt;!-- IrisLogin Gallery Code: Begin --&gt;
+  &lt;script type="text/javascript" charset="utf-8" src="<?=base_url("/public/js/manage-gallery.js")?>"&gt;&lt;/script&gt;&lt;iframe src="<?= base_url(SERVICE_NAME_GALLERY.'/'.$website['info']->website_id) ?>" width="550px" height="700px" frameborder="0" id="irislogin-galleries"&gt;&lt;/iframe&gt;
+&lt;!-- IrisLogin Gallery Code: End --&gt;</pre>
+
 				</div>
 
 			</div> <!-- #tab-content -->
 			
-		</div> <!-- #offer-tabs-wrapper -->
+		</div> <!-- #gallery-tabs-wrapper -->
 
 	</section>
 </div><!-- content -->

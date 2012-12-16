@@ -66,6 +66,7 @@ $(document).ready(function(){
 
 				<li id="offer-settings-selector"><a href="#offer-settings" data-toggle="tab">Impostazioni</a></li>
 				<li id="offer-descr-selector"><a href="#offer-descr" data-toggle="tab">Maggiorni Informazioni</a></li>
+				<li id="service-html-code-selector"><a href="#service-html-code" data-toggle="tab">Codice Servizio</a></li>
 			</ul> <!-- #tab -->
 
 			<div id="tab-content" class="span10 tab-content">
@@ -338,6 +339,17 @@ $(document).ready(function(){
 				<div class="tab-pane fade" id="offer-descr">
 					<p class="dark">Con il servizio offerte potrai inserire nella pagina dedicata del tuo sito offerte e promozioni riguardanti i tuoi servizi e prodotti.
 					Potrai deciderne la scadenza e se hai sottoscritto anche il servizio <em>Newsletter</em> avvisare in automatico i tuoi clienti che si sono registrati sul tuo sito dei nuovi inserimenti.</p>
+				</div>
+				
+				<div class="tab-pane fade" id="service-html-code">
+					<h2>Codice per l'utilizzo del servizio 'Gallery'</h2>
+					<p>Per utilizzare il servizio Gallery fornito da IrisLogin in una qualsiasi pagina è sufficiente utilizzare il seguente codice HTML.</p>
+
+					<pre class="irislogin-service-code prettyprint ">
+&lt;!-- IrisLogin Offers Code: Begin --&gt;
+  &lt;iframe src="<?= base_url(SERVICE_NAME_OFFERS.'/'.$website['info']->website_id) ?>" width="550px" height=650px" frameborder="0" id="irislogin-offers"&gt;&lt;/iframe&gt;
+&lt;!-- IrisLogin Offers Code: End --&gt;</pre>
+
 				</div>
 
 			</div> <!-- #tab-content -->

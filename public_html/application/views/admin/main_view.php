@@ -295,7 +295,7 @@
 					?>
 					<a href="<?=$link?>">
 						<span>
-							<strong>Aggiungi una Gallery</strong>
+							<strong>Crea Gallery</strong>
 							<em>Clicca qui per creare una nuova galleria di immagini.</em>
 						</span>
 					</a>
