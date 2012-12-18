@@ -63,10 +63,10 @@ function onMessage (event) {
 }
 
 jQuery().ready(function(){
-	if(getIE_Version() < 8 ){
-		window.alert("Versions 'Internet Explorer' prior to 8 are not supported by this service. Please update your browser for a better navigation expirience.");
+	IEv = getIE_Version();
+	if( IEv > 0 && IEv < 8 ) {
+		window.alert("Versions 'Internet Explorer' prior to 8 are not fully supported by this service. Please update your browser for a better navigation expirience.");
 	}
-	
 	// Create the wrapper
 	wrapper_element = $('<div/>').attr({
 		id: gallery_iframe_wrapper_id,
