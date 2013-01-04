@@ -65,7 +65,8 @@ class Offers extends CI_Controller
 		}
 		else
 		{
-			show_error($offer_data['error']);
+			log_message('info', "Offer #{$o_id} not in the database.");
+			show_404("offers/view/{$o_id}", FALSE);
 		}
 	}
 	
