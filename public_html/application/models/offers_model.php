@@ -47,6 +47,33 @@ class Offers_Model extends CI_Model
 		}
 	}
 	
+	
+	function get_offers_title($website=NULL, $limit = FALSE)
+	{
+		try
+		{
+			$this->db->select("id, offer_title, offer_special", FALSE);
+			$this->db->from(TABLE_OFFERS);
+			$this->db->where('offer_visible', 1);
+			$this->db->order_by('offer_special', 'DESC')->order_by('offer_creation', 'DESC');
+			
+			if($website != NULL)
+				$this->db->where(TABLE_OFFERS.".website_id", $website);
+			if( $limit )
+				$this->db->limit($limit);
+			
+			$results = $this->db->get()->result();
+				
+			return array('status' => TRUE, 'result' => $results);
+
+		}
+		catch (Exception $e)
+		{
+			return array('status' => FALSE, 'error' => $e->getMessage());
+		}
+	}
+	
+	
 	// Should return the new offer_id or a string containing the error
 	function add_offer($input_data, $website_id=FALSE)
 	{			

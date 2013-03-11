@@ -70,6 +70,21 @@ class Offers extends CI_Controller
 		}
 	}
 	
+	public function titles($w_id)
+	{
+		$offers = $this->offers_model->get_offers_title($w_id, 3);
+		$this->view_data['offers'] = ($offers['status']) ? $offers['result'] : FALSE;
+		$this->view_data['special_img'] = $this->websites_model->get_special_img($w_id);
+
+		if(($style = $this->websites_model->get_style($w_id, SERVICE_ID_OFFERS)) != FALSE)
+			$this->view_data['css'] = $style;
+
+		$this->view_data['custom_style'] = $this->settings_model->getOptionArray($w_id, SERVICE_ID_OFFERS, array('text_color', 'title_color', 'bg_color'));
+
+		$this->load->view('offers/offers_titles_view', $this->view_data);
+		
+	}
+	
 
 } 
 

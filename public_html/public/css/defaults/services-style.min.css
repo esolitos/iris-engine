@@ -692,3 +692,4 @@ a.thumbnail:hover{border-color:#0088cc;-webkit-box-shadow:0 1px 4px rgba(0, 105,
 #offer-list .offer_body{font-style:italic;}
 .offer_image{display:block;max-width: 90%;margin: 5px auto;text-align:center;}
 .offer_image.small{max-width: 50%;float: right;margin:0;margin-left:5px;}
+#offer-title-list .special-img{max-height: 25px}
