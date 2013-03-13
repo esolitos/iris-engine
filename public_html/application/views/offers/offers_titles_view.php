@@ -5,7 +5,7 @@
 	
 	<title>Offerte</title>
 </head>
-<body>
+<body class="page-offers-title">
 <div class="content">
 	<!-- Including the css -->
 	<div style="display:none;visibility:hidden;">
