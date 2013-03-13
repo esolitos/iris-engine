@@ -67,10 +67,12 @@ jQuery().ready(function(){
 	if( IEv > 0 && IEv < 8 ) {
 		window.alert("Versions 'Internet Explorer' prior to 8 are not fully supported by this service. Please update your browser for a better navigation expirience.");
 	}
+	
 	// Create the wrapper
+	windowHeight = $(window).height();
 	wrapper_element = $('<div/>').attr({
 		id: gallery_iframe_wrapper_id,
-		style: "position: absolute;top:0;bottom:0;left:0;right:0;height:100%;width:100%;display: none;background-color:black;background-color:rgba(0,0,0,0.7);"
+		style: "position: fixed;top:0;left:0;height:"+windowHeight+";width:100%;display: none;background-color:black;background-color:rgba(0,0,0,0.7);"
 	}).appendTo("body");
 	
 	// Create closing icon
@@ -81,6 +83,14 @@ jQuery().ready(function(){
 	
 	close_icon.bind('click', function(){
 		hide_gallery();
+	});
+	
+	$(window).bind('resize', function(){
+		windowHeight = $(window).height();
+		// console.log(windowHeight);
+		console.log(document.documentElement.clientHeight);
+		$("#"+gallery_iframe_wrapper_id).css('height', windowHeight);
+		// $("#"+gallery_iframe_id).css('height', windowHeight)
 	});
 	
 	// Finally add the listenbers

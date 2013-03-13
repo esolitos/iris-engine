@@ -50,6 +50,9 @@ define('GALLERY_MAX_GALLERY_IMAGES', 12);
 // Massima dimensione disponibile per l'upload (5MB)
 define('UPLOAD_MAX_SIZE', (1024 * 5));
 
+// Numero masimo di caratteri nei titoli delle offerte quando vien mostrato il riassunto
+define('OFFER_TITLE_MAX_LENGTH', 50);
+
 
 // Defaults Values
 define('IRIS_MAIL', 'iris@irislogin.it');

@@ -9,6 +9,7 @@
 <div class="content">
 	<!-- Including the css -->
 	<div style="display:none;visibility:hidden;">
+		<link rel="stylesheet" href="<?=base_url("/public/css/defaults/services-style.min.css")?>" type="text/css" media="screen" charset="utf-8">
 		<?if(isset($css) AND $css):?>
 			<link rel="stylesheet" href="<?=base_url($css)?>" type="text/css" media="all" charset="utf-8"/>
 			<style type="text/css" media="screen">
@@ -36,8 +37,8 @@
 	<?if($offers):?>
 		<div id="offer-title-list">
 			<?foreach($offers as $offer):?>
-					<div class="offer clearfix<? ;if($offer->offer_special) echo " special";?>">
-						<h3 class="offer_title">
+					<div class="offer clearfix well<? ;if($offer->offer_special) echo " special";?>">
+						<strong class="offer_title">
 							<?php if($offer->offer_special):?>
 								<?php if ($special_img): ?>
 									<img src="<?=base_url(PATH_WEB_UPLOAD.$special_img)?>" class="special-img">
@@ -45,8 +46,13 @@
 									<img src="<?=base_url("/public/img/icon-star-special.png")?>" class="special-img">
 								<?php endif ?>
 							<? endif; ?>
-							<?=$offer->offer_title?>
-						</h3>
+							<?
+								if(strlen($offer->offer_title) > OFFER_TITLE_MAX_LENGTH)
+									echo substr($offer->offer_title, 0, OFFER_TITLE_MAX_LENGTH)."&hellip;";
+								else
+									echo $offer->offer_title;
+							?>
+						</strong>
 					</div>
 			<?endforeach;?>
 		</div>

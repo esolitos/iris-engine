@@ -76,7 +76,7 @@
 				<div class="controls">
 					<label class="checkbox">
 						<input id="law_confirmation" type="checkbox" name="law_confirmation" value="1" >
-						I dati personali da te liberamente comunicati saranno trattati in via del tutto riservata nel pieno rispetto della legge 31 dicembre 1996 n.675.
+						I dati personali da te liberamente comunicati saranno trattati in via del tutto riservata. <small><em>Vedi Informazioni sottostanti.</em></small>
 					</label>
 				</div>
 			</div>

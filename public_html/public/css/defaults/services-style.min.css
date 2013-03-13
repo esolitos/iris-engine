@@ -692,4 +692,7 @@ a.thumbnail:hover{border-color:#0088cc;-webkit-box-shadow:0 1px 4px rgba(0, 105,
 #offer-list .offer_body{font-style:italic;}
 .offer_image{display:block;max-width: 90%;margin: 5px auto;text-align:center;}
 .offer_image.small{max-width: 50%;float: right;margin:0;margin-left:5px;}
-#offer-title-list .special-img{max-height: 25px}
+#offer-title-list{width:98%;margin:0 auto;}
+#offer-title-list .offer_title{font-size:1.1em;}
+#offer-title-list .special-img{display:inline-block;margin:1px;max-height:20px}
+#offer-title-list .well {padding:7px 5px;margin: 5px 0px; min-height:10px;}

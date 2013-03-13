@@ -15,9 +15,9 @@ class Offers_Model extends CI_Model
 	{
 		try
 		{
-			$this->db->select("id, username AS author, offer_title, offer_body, offer_creation, offer_last_edit, DATE_FORMAT(offer_expire, '%d-%m-%Y') as offer_expire, offer_special, offer_image, offer_visible, , website_name", FALSE);
+			$this->db->select("id, username AS author, offer_title, offer_body, DATE_FORMAT(offer_creation, '%d-%m-%Y %H:%i') as offer_creation, offer_last_edit, DATE_FORMAT(offer_expire, '%d-%m-%Y') as offer_expire, offer_special, offer_image, offer_visible, , website_name", FALSE);
 			$this->db->from(TABLE_OFFERS)->join(TABLE_USERS, 'author_id = user_id')->join(TABLE_WEBSITES, TABLE_OFFERS.".website_id=".TABLE_WEBSITES.".website_id");
-			$this->db->order_by('offer_creation', 'DESC');
+			$this->db->order_by('offer_creation', 'ASC');
 			
 			if($website != NULL)
 				$this->db->where(TABLE_OFFERS.".website_id", $website);
@@ -55,6 +55,7 @@ class Offers_Model extends CI_Model
 			$this->db->select("id, offer_title, offer_special", FALSE);
 			$this->db->from(TABLE_OFFERS);
 			$this->db->where('offer_visible', 1);
+			$this->db->where('( offer_expire > "'. date("Y-m-d") . '" OR offer_expire IS NULL )');
 			$this->db->order_by('offer_special', 'DESC')->order_by('offer_creation', 'DESC');
 			
 			if($website != NULL)
