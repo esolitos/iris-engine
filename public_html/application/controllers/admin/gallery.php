@@ -21,8 +21,8 @@ class Gallery extends CI_Controller
 		$this->view_data['user'] = $this->session->all_userdata();
 		
 		$this->load->model('gallery_model');
-		$this->lang->load('error', 'italiano');	
-		$this->lang->load('messages', 'italiano');	
+		$this->lang->load('error', CURR_LANG);	
+		$this->lang->load('messages', CURR_LANG);	
 	}
 		
 	function index()

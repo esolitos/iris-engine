@@ -1,10 +1,9 @@
 <?php
 $lang = array(
 	
-	'ERR'						=> "Errore",
-	'ERR_GENERIC'				=> "Errore generico nel sistema.",
-	'ERR_SENDING'				=> "Errore nell'invio della richiesta! Riprova più tardi.",
-	'WARN'						=> "Attenzione",
+	'ERR'						=> "Generischer Fehler in das System.",
+	'ERR_SENDING'				=> "Fehler beim das Senden der Anfrage! Bitte versuchen Sie es später noch einmal.",
+	'WARN'						=> "Vorsicht",
 
 	'SRVC-GALLERY-CREATE-ERR'	=> "Impossibile creare una galleria.",
 	'SRVC-GALL-ADD-LIMIT'		=> "Hai raggiunto il limite di gallerie realizzabili, contattaci per richiedere maggiore spazio!",

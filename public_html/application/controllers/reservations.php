@@ -17,6 +17,11 @@ class Reservations extends CI_Controller
 
 		$this->load->model('reservations_model');
 		$this->view_data['options'] = explode(',', $this->input->get('options'));
+
+		// Load the language.
+		$this->lang->load('error', CURR_LANG);
+		$this->lang->load('services/common', CURR_LANG);
+		$this->lang->load('services/booking', CURR_LANG);
 	}
 
 	
@@ -55,13 +60,11 @@ class Reservations extends CI_Controller
 		if($this->input->post('submit') && $this->_subscription_status($w_id))
 		{
 			// Setting-up library "FormValidation"
-			$this->form_validation->set_message('_check_date', 'Devi inserier la data nel formato corretto: GG-MM-AAA. <em>(Es. 27-10-2013)</em>');
-			$this->form_validation->set_message('required', '%s &egrave; obbligatorio.');
-			$this->form_validation->set_message('is_natural_no_zero', '%s deve essere positivo e diverso da zero.');
-			$this->form_validation->set_message('valid_email', '%s deve essere un indirizzo email valido.');
-			$this->form_validation->set_message('matches', 'Gli indirizzi eMail deveno corrispondere.');
-			$this->form_validation->set_message('is_natural_no_zero', '%s deve essere positivo e diverso da zero.');
-			$this->form_validation->set_message('is_natural_no_zero', '%s deve essere positivo e diverso da zero.');
+			$this->form_validation->set_message('_check_date',		$this->lang->line('_check_date'));
+			$this->form_validation->set_message('required',			$this->lang->line('required'));
+			$this->form_validation->set_message('is_natural_no_zero', $this->lang->line('is_natural_no_zero'));
+			$this->form_validation->set_message('valid_email',		$this->lang->line('valid_email'));
+			$this->form_validation->set_message('matches',			$this->lang->line('matches'));
 			
 			$form_config = array(
 				array('field' => 'law_confirmation',	'label' => 'L\'accettazione al trattamento dei dati personali', 'rules' => 'required'),
@@ -123,12 +126,12 @@ class Reservations extends CI_Controller
 				{
 					$input['email_sent'] = 1;
 					$this->reservations_model->add_reservation($input);
-					$this->view_data['message'] = "La tua richiesta è stata inviata correttamente! Attendi ora la conferma da parte dell'albergatore.";
+					$this->view_data['message'] = $this->lang->line('request_sent_now_wait');
 				}
 				else
-					$this->view_data['error'] = "Errore nell'invio della richiesta! Riprova più tardi.";
+					$this->view_data['error'] = $this->lang->line('ERR_SENDING');
 				
-				$this->view_data['title'] = "Servizio di Booking";
+				$this->view_data['title'] = $this->lang->line('title_booking_service');
 				$this->view_data['css'] = $this->websites_model->get_style($w_id, SERVICE_ID_GALLERY);
 				$this->load->view('common/message_view', $this->view_data);
 				return;

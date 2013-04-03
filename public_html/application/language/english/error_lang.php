@@ -1,8 +1,7 @@
 <?php
 $lang = array(
 	
-	'ERR'						=> "Errore",
-	'ERR_GENERIC'				=> "Errore generico nel sistema.",
+	'ERR'						=> "Errore generico nel sistema.",
 	'ERR_SENDING'				=> "Errore nell'invio della richiesta! Riprova più tardi.",
 	'WARN'						=> "Attenzione",
 

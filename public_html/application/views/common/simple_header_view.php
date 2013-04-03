@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='it'>
+<html lang='<?=substr(CURR_LANG, 0, 2)?>'>
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	

@@ -67,7 +67,7 @@
 				</a>
 			<?php endforeach ?>
 		<?php else: ?>
-			<p>Nessuna immagine ancora caricata in questa galleria.</p>
+			<p><?=$this->lang->line('empty_gallery');?></p>
 		<?php endif ?>
 	</div>
 </body>

@@ -16,6 +16,11 @@ class Newsletter extends CI_Controller
 
 		$this->load->model('newsletter_model');
 		$this->view_data['options'] = explode(',', $this->input->get('options'));
+		
+		// Load the language.
+		$this->lang->load('error', CURR_LANG);
+		$this->lang->load('services/common', CURR_LANG);
+		$this->lang->load('services/newsletter', CURR_LANG);
 	}
 
 
@@ -62,7 +67,11 @@ class Newsletter extends CI_Controller
 			$this->view_data['form_attrib']['id'] = 'newsletter_subscription';
 			$this->view_data['form_hidden']['user_website'] = $w_id;
 
-			output(array('newsletter/registration_view.php' => $this->view_data));
+			output(array(
+				'common/simple_header_view' => $this->view_data,
+				'newsletter/registration_view.php' => $this->view_data,
+				'common/simple_footer_view' => $this->view_data,
+				));
 		}
 		else
 		{
