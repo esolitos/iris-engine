@@ -68,14 +68,14 @@ class Reservations extends ESO_Controller
 			$this->form_validation->set_message('matches',			$this->lang->line('matches'));
 			
 			$form_config = array(
-				array('field' => 'law_confirmation',	'label' => 'L\'accettazione al trattamento dei dati personali', 'rules' => 'required'),
-				array('field' => 'name',				'label' => 'Il Nome',				'rules' => 'required'),
-				array('field' => 'surname',				'label' => 'Il Cognome',			'rules' => 'required'),
-				array('field' => 'tel',					'label' => 'Il Telefono',			'rules' => 'required'),
-				array('field' => 'email',				'label' => 'L\'eMail',				'rules' => 'required|valid_email|matches[email_check]'),
-				array('field' => 'from_date',			'label' => 'La data di arrivo',		'rules' => 'required|callback__check_date'),
-				array('field' => 'to_date',				'label' => 'La data di partenza',	'rules' => 'required|callback__check_date'),
-				array('field' => 'adults',				'label' => 'Il Numero di adulti',	'rules' => 'required|is_natural_no_zero'),
+				array('field' => 'law_confirmation',	'label' => $this->lang->line('field_law_confirmation'), 'rules' => 'required'),
+				array('field' => 'name',				'label' => $this->lang->line('field_name'),				'rules' => 'required'),
+				array('field' => 'surname',				'label' => $this->lang->line('field_surname'),			'rules' => 'required'),
+				array('field' => 'tel',					'label' => $this->lang->line('field_tel'),				'rules' => 'required'),
+				array('field' => 'email',				'label' => $this->lang->line('field_email'),			'rules' => 'required|valid_email|matches[email_check]'),
+				array('field' => 'from_date',			'label' => $this->lang->line('field_from_date'),		'rules' => 'required|callback__check_date'),
+				array('field' => 'to_date',				'label' => $this->lang->line('field_to_date'),			'rules' => 'required|callback__check_date'),
+				array('field' => 'adults',				'label' => $this->lang->line('field_adults'),			'rules' => 'required|is_natural_no_zero'),
 
 				// those below are just for the form data refill
 				array('field' => 'email_check',	'label' => '',	'rules' => ''),
