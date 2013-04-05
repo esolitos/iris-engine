@@ -18,6 +18,7 @@ $lang =  array(
 	'arrival'	=> "Arrival",
 	'departure'	=> "Departure",
 	'wait_for_confirm'	=> "Once you submit your request you will have to wait for our communication to the availability of the required period and confirmation of the booking.",
+	'request_sent_now_wait'	=> "Your request has been sent successfully! Now wait for confirmation by the accommodation provider.",
 	''	=> "",
 	''	=> "",
 );

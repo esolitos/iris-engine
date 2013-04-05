@@ -18,6 +18,7 @@ $lang =  array(
 	'arrival'	=> "Aufenthalt von",
 	'departure'	=> "Bis",
 	'wait_for_confirm'	=> "Sobald Sie Ihre Anfrage müssen Sie für unsere Kommunikation mit der Verfügbarkeit der erforderlichen Zeitraum und Bestätigung der Buchung warten.",
+	'request_sent_now_wait'	=> "Ihre Anfrage wurde erfolgreich gesendet! Warte jetzt vom Hotel bestätigt.",
 	''	=> "",
 	''	=> "",
 );
