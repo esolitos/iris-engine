@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Settings extends CI_Controller
+class Settings extends ESO_Controller
 {
 	var $view_data = array();
 	

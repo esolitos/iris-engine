@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Users extends CI_Controller
+class Users extends ESO_Controller
 {
 	var $curr_uid = 0;
 	var $curr_wid = 0;

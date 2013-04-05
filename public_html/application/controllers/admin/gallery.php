@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Gallery extends CI_Controller
+class Gallery extends ESO_Controller
 {
 	var $view_data = array();
 	var $head_data = array();

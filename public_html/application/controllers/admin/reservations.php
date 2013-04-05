@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Reservations extends CI_Controller
+class Reservations extends ESO_Controller
 {
 	var $user = array();
 	var $view_data = array();

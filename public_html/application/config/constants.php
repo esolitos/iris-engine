@@ -121,30 +121,5 @@ switch (TRUE) {
 		break;
 }
 
-$lang = (isset($_GET['lang'])) ? $_GET['lang'] : FALSE;
-
-switch ($lang) {
-	case 'en':
-	case 'eng':
-	case 'english':
-		define('CURR_LANG', 'english');
-		break;
-
-	case 'de':
-	case 'deu':
-	case 'german':
-	case 'deutsche':
-		define('CURR_LANG', 'deutsche');
-		break;
-
-	case 'it':
-	case 'ita':
-	case 'italian':
-	case 'italiano':
-	default:
-		define('CURR_LANG', 'italiano');
-		break;
-}
-
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

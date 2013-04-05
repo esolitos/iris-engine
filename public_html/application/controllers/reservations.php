@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Reservations extends CI_Controller
+class Reservations extends ESO_Controller
 {
 	var $user = array();
 	var $view_data = array();
@@ -60,6 +60,7 @@ class Reservations extends CI_Controller
 		if($this->input->post('submit') && $this->_subscription_status($w_id))
 		{
 			// Setting-up library "FormValidation"
+			$this->lang->load('form_validation', CURR_LANG);
 			$this->form_validation->set_message('_check_date',		$this->lang->line('_check_date'));
 			$this->form_validation->set_message('required',			$this->lang->line('required'));
 			$this->form_validation->set_message('is_natural_no_zero', $this->lang->line('is_natural_no_zero'));

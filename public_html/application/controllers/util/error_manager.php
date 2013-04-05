@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Error_Manager extends CI_Controller
+class Error_Manager extends ESO_Controller
 {
 	var $user = array();
 	var $view_data = array();

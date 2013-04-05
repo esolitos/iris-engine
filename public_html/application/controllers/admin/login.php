@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Login extends CI_Controller
+class Login extends ESO_Controller
 {
 	var $view_data=array();
 	
