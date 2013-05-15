@@ -140,9 +140,16 @@ $(document).ready(function(){
 					<?=form_open_multipart("admin/websites/add", array('class' => 'form-horizontal'))?>
 						<fieldset>
 							<div class="control-group <?php if(form_error('website_name')) echo "error";?>">
-								<label class="control-label" for="website_id">Nome del Sito:</label>
+								<label class="control-label" for="website_name">Nome del Sito:</label>
 								<div class="controls">
 									<input class="input-xlarge" type="text" name="website_name" value="<?=set_value('website_name')?>" placeholder="Nome Visualizzato" >
+								</div>
+							</div>
+							
+							<div class="control-group <?php if(form_error('website_email')) echo "error";?>">
+								<label class="control-label" for="website_email">eMail Azienda:</label>
+								<div class="controls">
+									<input class="input-xlarge" type="text" name="website_email" value="<?=set_value('website_email')?>" placeholder="Indirizzo eMail" >
 								</div>
 							</div>	
 

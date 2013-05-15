@@ -54,7 +54,7 @@ class Websites_Model extends CI_Model
 		return $data;
 	}
 	
-	function add_website($name, $url)
+	function add_website($name, $url, $email)
 	{
 		$this->db->where('website_url', $url);
 		if($this->db->count_all_results(TABLE_WEBSITES) != 0)
@@ -62,7 +62,8 @@ class Websites_Model extends CI_Model
 		
 		$data = array(
 						'website_url' => $url,
-						'website_name' => $name
+						'website_name' => $name,
+						'website_email' => $email
 					 );
 		$this->db->insert(TABLE_WEBSITES, $data);
 		
@@ -83,12 +84,34 @@ class Websites_Model extends CI_Model
 
 	function edit_website($id, $data)
 	{
+		if( array_key_exists('newsletter_key', $data) )
+		{
+			$this->set_newsletter_key($id, $data['newsletter_key']);
+			unset($data['newsletter_key']);
+		}
+			
 		$this->db->where('website_id', $id);
 		$this->db->set($data);
 		if($this->db->update(TABLE_WEBSITES))
 			return array('status' => TRUE, 'affected' => $this->db->affected_rows());
 		else
 			return array('status' => FALSE, 'error_code' => 1, 'error' => "Error while editing website!", 'affected' => $this->db->affected_rows());
+	}
+	
+	function set_newsletter_key($id, $key)
+	{
+		$query = NULL;
+		
+		if ( $this->db->get_where(TABLE_NEWSLETTER, array('website_id'=>$id))->num_rows() )
+		{
+			$query = $this->db->where('website_id', $id)->set('newsletter_key', $key)->update(TABLE_NEWSLETTER);
+		}
+		 else
+		{
+			$query = $this->db->insert(TABLE_NEWSLETTER, array('website_id'=>$id, 'newsletter_key'=>$key));
+		}
+		
+		return $query;
 	}
 	
 	function add_service($data)

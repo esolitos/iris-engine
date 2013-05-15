@@ -1,10 +1,9 @@
 <?
-	if($website_name===FALSE)
-		$website_name = set_value('website_name');
-		
-	if($website_url===FALSE)
-		$website_url = set_value('website_url');
+	$website_name = ($website_name) ? $website_name : set_value('website_name');
+	$website_url = ($website_url) ? $website_url : set_value('website_url');
+	$website_email = ($website_email) ? $website_email : set_value('website_email');
 ?>
+
 <script type="text/javascript" charset="utf-8">
 	$().ready(function() {
 		$("#add_subscr_link").click(function(e){
@@ -39,12 +38,19 @@
 	<?=form_open_multipart(uri_string(), array('class' => 'form-horizontal'))?>
 		<fieldset>
 			<div class="control-group <?php if(form_error('website_name')) echo "error";?>">
-				<label class="control-label" for="website_id">Nome del Sito:</label>
+				<label class="control-label" for="website_name">Nome del Sito:</label>
 				<div class="controls">
 					<input class="input-xlarge" type="text" name="website_name" value="<?=$website_name?>" placeholder="Nome Visualizzato" >
 				</div>
 			</div>	
 
+			<div class="control-group <?php if(form_error('website_email')) echo "error";?>">
+				<label class="control-label" for="website_email">eMail dell'Azienda:</label>
+				<div class="controls">
+					<input class="input-xlarge" type="text" name="website_email" value="<?=$website_email?>" placeholder="Indirizzo eMail" >
+				</div>
+			</div>
+			
 			<div class="control-group <?php if(form_error('website_url')) echo "error";?>">
 				<label class="control-label" for="website_url">URL Sito:</label>
 				<div class="controls">

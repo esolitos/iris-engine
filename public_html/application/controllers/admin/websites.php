@@ -56,16 +56,21 @@ class Websites extends ESO_Controller
 
 			// Setting-up library "FormValidation"
 			$form_config = array(
-								array(
+								 array(
 									'field'   => 'website_name', 
-									'label'   => 'Il nome del sito', 
+									'label'   => "Il nome del sito", 
 									'rules'   => 'trim|required'
-									),
-								array(
-									'field'   => 'website_url', 
-									'label'   => 'L\'URL del sito', 
+								 ),
+								 array(
+ 									'field'   => 'website_email', 
+ 									'label'   => "L'indirizzo dell'azienda",
+ 									'rules'   => 'trim|valid_email|required'
+								 ),
+								 array(
+									'field'   => 'website_url',
+									'label'   => "L'URL del sito",
 									'rules'   => 'trim|prep_url|valid_url|required'
-									),
+								 ),
 								);
 
 			$this->form_validation->set_rules($form_config);
@@ -75,6 +80,7 @@ class Websites extends ESO_Controller
 			if($this->form_validation->run() === FALSE)
 			{
 				$this->view_data['website_name'] = FALSE;
+				$this->view_data['website_email'] = FALSE;
 				$this->view_data['website_url'] = FALSE;
 
 				output(array(
@@ -85,7 +91,7 @@ class Websites extends ESO_Controller
 			}
 			else
 			{
-				$res = $this->websites_model->add_website($data['website_name'], $data['website_url']);
+				$res = $this->websites_model->add_website($data['website_name'], $data['website_url'], $data['website_email']);
 				if($res['status'])
 				{
 					$this->view_data['message'] = "Website {$data['website_name']} was added to the database. It's now suggested to <strong>".anchor('admin/users/add/'.$res['user_website'], "add a user")."</strong> as Website Admin!";
@@ -101,6 +107,7 @@ class Websites extends ESO_Controller
 		else
 		{
 			$this->view_data['website_name'] = FALSE;
+			$this->view_data['website_email'] = FALSE;
 			$this->view_data['website_url'] = FALSE;
 			
 			output(array(
@@ -131,7 +138,9 @@ class Websites extends ESO_Controller
 			$this->view_data['website_data'] = $website = $this->websites_model->load_website_data($w_id, TRUE);
 
 			$this->view_data['website_name'] = $website['info']->website_name;
+			$this->view_data['website_email'] = $website['info']->website_email;
 			$this->view_data['website_url'] = $website['info']->website_url;
+
 			$this->view_data['newsletter_key'] = $website['info']->newsletter_key;
 			
 			if ($this->input->is_ajax_request() AND $w_id)			
