@@ -29,9 +29,9 @@ class Reservations extends ESO_Controller
 	{
 		if($w_id)
 		{
-			// if( $this->_subscription_status($w_id))
+			if( $this->_subscription_status($w_id))
 			{
-				$this->view_data['newsletter'] = TRUE;
+				$this->view_data['newsletter'] = $this->_subscription_status($w_id, 'newsletter');
 				$this->view_data['form_attrib']['id'] = 'reservation_request';
 				$this->view_data['form_hidden']['website_id'] = $w_id;
 				
@@ -145,12 +145,12 @@ class Reservations extends ESO_Controller
 
 
 
-	private function _subscription_status($w_id)
+	private function _subscription_status($w_id, $service = 'booking')
 	{
 		$subscr = $this->websites_model->get_services_for_website($w_id, 'name');
 		
-		if (isset($subscr['booking']))
-			return ! $subscr['booking']->expired;
+		if (isset($subscr[$service]))
+			return ! $subscr[$service]->expired;
 		else
 			return FALSE;
 	}

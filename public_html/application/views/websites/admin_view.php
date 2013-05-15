@@ -104,7 +104,13 @@ $(document).ready(function(){
 												<em>Nessun Logo</em>
 											<? endif; ?>
 										</td>
-										<td class="site-services"><?=implode(", ", array_keys($site['services'])) ?></td>
+										<?php
+											$services_text = array();
+											foreach($site['services'] as $serv_name=>$serv)
+												if( ! $serv->expired )
+													$services_text[] = $serv_name;
+										 ?>
+										<td class="site-services"><?=implode(", ", $services_text) ?></td>
 										<td class="edit"><a class="modal-ajax-trigger" modal-title="Gestisci Sito" href="<?=base_url("/admin/websites/{$id}/edit")?>" rel="tooltip" data-original-title="Gestisci">&nbsp;</a></td>
 										<td class="delete"><a data-toggle="modal" href="#modal-offer-<?=$id;?>" rel="tooltip" data-original-title="Elimina">&nbsp;</a></td>
 
