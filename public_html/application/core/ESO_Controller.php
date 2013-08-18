@@ -14,13 +14,15 @@ class ESO_Controller extends CI_Controller {
 			$new_lang = $this->_getLanguage($_GET['lang']);
 			$this->session->set_flashdata('user_language', $new_lang);
 			define('CURR_LANG', $new_lang);
-
+			define('CURR_LANG_CODE', $this->_getLanguageCode($new_lang));
+			
 			log_message('debug', "Language from REQUEST: {$new_lang}");
 		}
 		else if ( ($user_language = $this->session->flashdata('user_language')) )
 		{
 			$this->session->keep_flashdata('user_language');
 			define('CURR_LANG', $user_language);
+			define('CURR_LANG_CODE', $this->_getLanguageCode($user_language));
 			
 			log_message('debug', "Language from SESSION: {$user_language}");
 		}
@@ -28,6 +30,7 @@ class ESO_Controller extends CI_Controller {
 		{
 			$default_language = $this->_getLanguage($this->config->item('language'));
 			define('CURR_LANG', $default_language);
+			define('CURR_LANG_CODE', $this->_getLanguageCode($default_language));
 			
 			log_message('debug', "Language from DEFAULTS: {$default_language}");
 		}
@@ -57,6 +60,23 @@ class ESO_Controller extends CI_Controller {
 			case 'italiano':
 			default:
 				return 'italiano';
+		}
+		
+	}
+	private function _getLanguageCode($value)
+	{
+		switch ($value) {
+			case 'english':
+				return LANG_ENG;
+
+			case 'deutsche':
+				return LANG_DEU;
+
+			case 'italiano':
+				return LANG_ITA;
+				
+			default:
+				return LANG_DEFAULT;
 		}
 		
 	}

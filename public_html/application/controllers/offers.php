@@ -3,6 +3,7 @@
 class Offers extends ESO_Controller
 {
 	var $view_data;
+	var $lang;
 	
 	function __construct()
 	{
@@ -23,7 +24,7 @@ class Offers extends ESO_Controller
 	{
 		if(is_numeric($w_id))
 		{
-			$offers = $this->offers_model->get_offers($w_id);
+			$offers = $this->offers_model->get_offers($w_id, CURR_LANG_CODE, in_array('lang-strict', $this->view_data['options']));
 			$this->view_data['offers'] = ($offers['status']) ? $offers['result'] : FALSE;
 			$this->view_data['special_img'] = $this->websites_model->get_special_img($w_id);
 
@@ -71,8 +72,9 @@ class Offers extends ESO_Controller
 	}
 	
 	public function titles($w_id)
-	{
-		$offers = $this->offers_model->get_offers_title($w_id, 3);
+	{		
+		$offers = $this->offers_model->get_offers_titles($w_id, 4, CURR_LANG_CODE, in_array('lang-strict', $this->view_data['options']));
+		
 		$this->view_data['offers'] = ($offers['status']) ? $offers['result'] : FALSE;
 		$this->view_data['special_img'] = $this->websites_model->get_special_img($w_id);
 

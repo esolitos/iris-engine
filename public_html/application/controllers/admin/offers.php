@@ -31,42 +31,31 @@ class Offers extends ESO_Controller
 		// Setting-up library "FormValidation"
 		$this->form_config = array(
 							array(
-								'field'   => 'offer_title', 
-								'label'   => 'titolo del\'offerta', 
-								'rules'   => 'required|max_length[50]|min_length[3]'
-								),
-							array(
-								'field'   => 'offer_body', 
-								'label'   => 'testo dell\'offerta', 
-								'rules'   => 'required'
-								),
-							array(
 								'field'   => 'offer_expire', 
 								'label'   => 'la data di scadenza', 
 								'rules'   => 'callback_check_date_it'
 								),
-							array(
-								'field'   => 'expires',
-								'label'   => '',
-								'rules'   => ''
-								),
-							array(
-								'field'   => 'offer_special',
-								'label'   => '',
-								'rules'   => ''
-								)
+							array('field'   => 'expires','label'   => '','rules'   => ''),
+							array('field'   => 'offer_special','label'   => '','rules'   => ''),
 							);
 	}
 	
 	function index()
 	{
+		global $LANGUAGES;
+		
+		if (empty($this->view_data['active_tab']))
+			$this->view_data['active_tab'] = NULL;
+		if (empty($this->view_data['used_langs']))
+			$this->view_data['used_langs'] = array();
+		
 		$this->view_data['form_add_attrib'] = array();
 		$this->view_data['form_add_hidden'] = array(
 											'author_id' => $this->userdata['user_id'],
 											'user_website' => $this->userdata['user_website']
 											);
 
-		$offers = $this->offers_model->get_offers($this->userdata['user_website']);
+		$offers = $this->offers_model->get_offers($this->userdata['user_website'], LANG_DEFAULT, TRUE);
 
 		if($offers['status'] === TRUE)
 			$this->view_data['offers'] = $offers['result'];
@@ -79,6 +68,8 @@ class Offers extends ESO_Controller
 			$this->view_data['css_file'] = $style;
 		
 		// $this->load->view('admin/offers_view', $this->view_data);
+		$this->view_data['lang_diff'] = $LANGUAGES;
+		unset($this->view_data['lang_diff'][LANG_DEFAULT]);
 		output(array(
 				'header' => init_headdata(),
 				'footer' => TRUE,
@@ -88,15 +79,29 @@ class Offers extends ESO_Controller
 	
 	function add()
 	{
+		global $LANGUAGES;
 		$image_data=FALSE;
 		$with_image = FALSE;
 		
 		// init the $_POST input array
 		$input = $this->input->post();
+		unset($input['new_lang']);
 		
 		// ----------------------------------------------------------------------------
 		// -----         Setting up and Loading needed Libraryes/Classes          -----
 		// ----------------------------------------------------------------------------
+		foreach ($input['offer_title'] as $l => $v) {
+			$this->form_config[] = array(
+				'field'   => 'offer_title['.$l.']', 
+				'label'   => 'titolo del\'offerta tradotto in '.$LANGUAGES[$l], 
+				'rules'   => 'required|max_length[50]|min_length[3]'
+			);
+			$this->form_config[] = array(
+				'field'   => 'offer_body['.$l.']', 
+				'label'   => 'testo del\'offerta tradotto in '.$LANGUAGES[$l],
+				'rules'   => 'required'
+			);
+		}
 		$this->form_validation->set_rules($this->form_config);
 		// ----------------------------------------------------------------------------
 		// -----                  End of settings and loading                     -----
@@ -104,17 +109,10 @@ class Offers extends ESO_Controller
 		
 		
 		if($this->form_validation->run() === FALSE)
-		{			
-			$this->view_data['form_add_hidden'] = array(
-												'author_id' => $this->userdata['user_id'],
-												'user_website' => $this->userdata['user_website']
-												);
-
-			output(array(
-					'header' => init_headdata(),
-					'footer' => TRUE,
-					'offers/admin_view' => $this->view_data
-					));
+		{
+			$this->view_data['used_langs'] = array_merge( array_keys($input['offer_title']), array_keys($input['offer_body']) );
+			$this->view_data['active_tab'] = "offer-add";
+			$this->index();
 		}
 		else // The form was submitted correctly
 		{
@@ -132,6 +130,8 @@ class Offers extends ESO_Controller
 			
 			if($this->view_data['error'])
 			{
+				$this->view_data['used_langs'] = array_keys($input['offer_title']);
+				$this->view_data['active_tab'] = "offer-add";
 				$this->index();
 			}
 			else
@@ -160,13 +160,15 @@ class Offers extends ESO_Controller
 	
 	function edit($action)
 	{
+		global $LANGUAGES;
 			// $action = $this->uri->segment(4);
 			if(is_numeric($action))
 			{
 				
 				$offer_data = $this->offers_model->load_offer($action);
 				if($offer_data['status'] === TRUE)
-				{
+				{	
+					$this->view_data['lang_diff'] = array_diff_key($LANGUAGES, $offer_data['result']->languages);
 					$this->view_data['offer'] = $offer_data['result'];
 					$this->view_data['form_edit_hidden'] = array('id' => $offer_data['result']->offer_id);
 					
@@ -178,7 +180,7 @@ class Offers extends ESO_Controller
 				}
 				else
 				{
-					$this->view_data['exec_result'] = $offer_data['error'];					
+					$this->view_data['error'] = $offer_data['error'];					
 					$this->index();
 				}
 			}
@@ -189,20 +191,27 @@ class Offers extends ESO_Controller
 					
 				unset($input['id']);
 				unset($input['submit']);
-			
-			
-				// ----------------------------------------------------------------------------
+				unset($input['new_lang']);
+				
 				// -----         Setting up and Loading needed Libraryes/Classes          -----
-				// ----------------------------------------------------------------------------
 				$this->load->helper('form');
+				foreach ($input['offer_title'] as $l => $v) {
+					$this->form_config[] = array(
+						'field'   => 'offer_title['.$l.']', 
+						'label'   => 'titolo tradotto in '.$LANGUAGES[$l].' del\'offerta', 
+						'rules'   => 'required|max_length[50]|min_length[3]'
+					);
+					$this->form_config[] = array(
+						'field'   => 'offer_body['.$l.']', 
+						'label'   => 'testo tradotto in '.$LANGUAGES[$l].' dell\'offerta',
+						'rules'   => 'required'
+					);
+				}
 				$this->form_validation->set_rules($this->form_config);
-				// ----------------------------------------------------------------------------
-				// -----                  End of settings and loading                     -----
-				// ----------------------------------------------------------------------------
 				
 				
 				if($this->form_validation->run() === FALSE)
-				{			
+				{
 					$this->edit($oid);
 				}
 				else
@@ -216,21 +225,21 @@ class Offers extends ESO_Controller
 							$res = $this->offers_model->edit_offer($oid, $input);
 
 							if($res['status'])
-								$this->view_data['exec_result'] = "The offer \"{$input['offer_title']}\" has been updated!";
+								$this->view_data['message'] = "The offer \"{$input['offer_title']}\" has been updated!";
 							else
-								$this->view_data['exec_result'] = "Unable to edit offer: ".$res['error'];
+								$this->view_data['error'] = "Unable to edit offer: ".$res['error'];
 						}
 						else
-							$this->view_data['exec_result'] = "Unable to edit offer: ".$upload['errors'];
+							$this->view_data['error'] = "Unable to edit offer: ".$upload['errors'];
 					}
 					else
 					{
 						$res = $this->offers_model->edit_offer($oid, $input);
 
 						if($res['status'])
-							$this->view_data['exec_result'] = "The offer \"{$input['offer_title']}\" has been updated!";
+							$this->view_data['message'] = "The offer \"{$input['offer_title'][LANG_DEFAULT]}\" has been updated!";
 						else
-							$this->view_data['exec_result'] = "Unable to edit offer: ".$res['error'];
+							$this->view_data['error'] = "Unable to edit offer: ".$res['error'];
 					}
 
 					$this->index();	

@@ -41,7 +41,17 @@
 		<div id="offer-list">
 			<?foreach($offers as $o_id=>$offer):?>
 				<?if(( ! $offer->expired AND $offer->offer_visible)):?>
-					<!-- BEGIN Offer ID <?=$offer->id?> -->
+				<!-- BEGIN Offer ID <?=$offer->id?> -->
+				<?php
+					$c_title = $offer->offer_title;
+					$c_body = $offer->offer_body;
+	
+					if( CURR_LANG_CODE != LANG_DEFAULT && !empty($offer->offer_title_multi[CURR_LANG_CODE]))
+					{
+						$c_body = $offer->offer_body_multi[CURR_LANG_CODE];
+						$c_title = $offer->offer_title_multi[CURR_LANG_CODE];
+					}
+				?>
 					<div class="well offer clearfix<?if(!$offer->offer_visible) echo " hidden";if($offer->expired) echo " expired";if($offer->offer_special) echo " special";?>">
 						<h2 class="offer_title">
 							<?php if($offer->offer_special):?>
@@ -51,7 +61,7 @@
 									<img src="<?=base_url("/public/img/icon-special.png")?>" class="special-img">
 								<?php endif ?>
 							<? endif; ?>
-							<?=anchor("offers/view/{$offer->id}", $offer->offer_title)?>
+							<?=anchor("offers/view/{$offer->id}", $c_title)?>
 							<?if($offer->expired AND $user):?>
 								<span class="title_expired">[EXPIRED]</span>
 							<?endif;?>
@@ -72,11 +82,10 @@
 								<img class="offer_image small" src="<?=base_url(PATH_WEB_UPLOAD.$offer->offer_image)?>"/>
 							<?php endif;?>
 							<?
-							if(strlen($offer->offer_body) > 200)
-								echo substr($offer->offer_body, 0, 200)."...";
-								// echo preg_match('/^(.*)\W.*$/', substr($offer->offer_body, 0, 200), $matches) ? $matches[1] : substr($offer->offer_body, 0, 200);
+							if(strlen($c_body) > 200)
+								echo substr($c_body, 0, 200)."...";
 							else
-								echo $offer->offer_body;
+								echo $c_body;
 
 							echo anchor("offers/view/{$offer->id}", "<br> &rarr; Maggiori informazioni");
 							?>

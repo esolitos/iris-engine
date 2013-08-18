@@ -1,3 +1,4 @@
+<? global $LANGUAGES ?>
 <!-- <script src="/public/bootstrap/js/bootstrap-tab.js" type="text/javascript" charset="utf-8"></script> -->
 <!-- <script src="/public/bootstrap/js/bootstrap-transition.js" type="text/javascript" charset="utf-8"></script> -->
 <!-- <script src="/public/bootstrap/js/bootstrap-tooltip.js" type="text/javascript" charset="utf-8"></script> -->
@@ -30,6 +31,30 @@ $(document).ready(function(){
 		// Rimuovo il jump all'elemento.
 		$('html, body').animate({scrollTop:0});	
 	}
+	
+	// Add a new translation on request.
+	$("#add_lang").click( function(clicked) {
+		clicked.preventDefault();
+		var nlang = $("#new_lang").val();
+		if ($("#title_lang_"+nlang).length )
+		{
+			$("#title_lang_"+nlang+" input, #title_lang_"+nlang+" textarea").attr('disabled', false)
+			$("#title_lang_"+nlang).parents(".accordion-group").removeClass("in hidden");
+		
+			$("#new_lang option[value="+nlang+"]").attr('disabled', true).attr('selected', false);
+			$("html, body").animate({ scrollTop: $("#offer-add").offset().top-180 }, 'slow');	
+		}
+	} );
+	
+	$("a.remove_lang").click( function(clicked){
+		clicked.preventDefault();
+		var rlang = $(this).data("lang");
+		
+		$("#title_lang_"+rlang).attr('disabled', true).parents(".accordion-group").addClass("hidden");
+		
+		$("#new_lang option[value="+rlang+"]").attr('disabled', false);
+	} );
+	
 });
 /* ]]> */
 
@@ -58,20 +83,20 @@ $(document).ready(function(){
 		<div id="offer-tabs-wrapper" class="tabbable tabs-left span12">
 			<ul id="tab" class="nav nav-tabs span2">
 				<?php if (isset($offers) AND count($offers)>0): ?>
-					<li id="offer-list-selector" class="active"><a href="#offer-list" data-toggle="tab">Offerte Inserite</a></li>
-					<li id="offer-add-selector"><a href="#offer-add" data-toggle="tab">Nuova Offerta</a></li>
+					<li id="offer-list-selector" class="<?php if( empty($active_tab) OR $active_tab == "offer-list") echo "active" ?>"><a href="#offer-list" data-toggle="tab">Offerte Inserite</a></li>
+					<li id="offer-add-selector" class="<?php if( $active_tab == "offer-add") echo "active" ?>"><a href="#offer-add" data-toggle="tab">Nuova Offerta</a></li>
 				<?php else: ?>
-					<li id="offer-add-selector" class="active"><a href="#offer-add" data-toggle="tab">Nuova Offerta</a></li>
+					<li id="offer-add-selector" class="<?php if( $active_tab == "offer-add") echo "active" ?>"><a href="#offer-add" data-toggle="tab">Nuova Offerta</a></li>
 				<?php endif; ?>
 
-				<li id="offer-settings-selector"><a href="#offer-settings" data-toggle="tab">Impostazioni</a></li>
-				<li id="offer-descr-selector"><a href="#offer-descr" data-toggle="tab">Maggiorni Informazioni</a></li>
-				<li id="service-html-code-selector"><a href="#service-html-code" data-toggle="tab">Codice Servizio</a></li>
+				<li id="offer-settings-selector" class="<?php if( $active_tab == "offer-settings") echo "active" ?>"><a href="#offer-settings" data-toggle="tab">Impostazioni</a></li>
+				<li id="offer-descr-selector" class="<?php if( $active_tab == "offer-descr") echo "active" ?>"><a href="#offer-descr" data-toggle="tab">Maggiorni Informazioni</a></li>
+				<li id="service-html-code-selector" class="<?php if( $active_tab == "service-html-code") echo "active" ?>"><a href="#service-html-code" data-toggle="tab">Codice Servizio</a></li>
 			</ul> <!-- #tab -->
 
 			<div id="tab-content" class="span10 tab-content">
 				<?php if (isset($offers) AND count($offers)>0): ?>
-					<div class="tab-pane fade in active" id="offer-list">
+					<div class="tab-pane fade <?php if( empty($active_tab) OR $active_tab == "offer-list") echo "in active" ?>" id="offer-list">
 						<h3>Offerte gi&agrave; inserite e presenti nel sistema.</h3>
 							<table class="table table-striped">
 								<thead>
@@ -118,7 +143,9 @@ $(document).ready(function(){
 							</table>
 					</div> <!-- #offer-list -->
 				<?php endif; //Is set Offers AND count($offers)>0 ?>
-				<div class="tab-pane fade <?php if( ! isset($offers) OR count($offers) <= 0) echo "in active" ?>" id="offer-add">
+
+
+				<div class="tab-pane fade <?php if( $active_tab == "offer-add" OR empty($offers)) echo "in active" ?>" id="offer-add">
 					<?php echo form_open_multipart('admin/offers/add', array('class' => 'form-horizontal', 'id' => 'form-add-offer'), $form_add_hidden); ?>
 						<fieldset>
 							<legend>Aggiungi un Offerta</legend>
@@ -132,12 +159,53 @@ $(document).ready(function(){
 						</fieldset>	
 
 						<fieldset>
-							<div class="control-group <? if(form_error('offer_title')) echo "error"?>">
+							<!-- Old Single-Language Title -->
+							<!-- <div class="control-group <? if(form_error('offer_title')) echo "error"?>">
 								<label class="control-label" for="offer_title">Titolo</label>
 								<div class="controls">
 									<input class="input-xlarge focused" id="offer_title" name="offer_title" size="50" maxlength="100" value="<?=set_value('offer_title')?>" placeholder="">
 								</div>
-							</div>
+							</div> -->
+							<!-- // Old Single-Language Title -->
+							
+								<div class="accordion" id="title_accordion">
+									<?php foreach ($LANGUAGES as $o_lang=>$o_name): ?>
+										<?php $if_hidden = ( in_array($o_lang, $used_langs) OR $o_lang == LANG_DEFAULT ) ? FALSE : 'hidden' ;  ?>
+										
+											<div class="accordion-group <?=$if_hidden?>">
+												<div class="accordion-heading">
+													<?php if($o_lang != LANG_DEFAULT): ?>
+														<a class="remove_lang btn btn-mini btn-warning" href="#" data-lang="<?=$o_lang?>"> Elimina</a>
+													<?php endif ?>
+													<a class="accordion-toggle" data-toggle="collapse" data-parent="#title_accordion" href="#title_lang_<?=$o_lang?>"  data-lang="<?=$o_lang?>"><span class="lang-name"><?=$o_name?></span></a>
+												</div>
+												<div id="title_lang_<?=$o_lang?>" class="accordion-body collapse <?if($o_lang == LANG_DEFAULT) echo "in"?>">
+													<div class="accordion-inner">
+
+														<div class="control-group  <?php if(form_error('offer_title['.$o_lang.']')) echo "error";?>">
+															<label class="control-label" for="offer_title">Titolo Offerta</label>
+															<div class="controls">
+																	<input <?if($if_hidden) echo "disabled"?> type="text" class="input-xlarge focused" name="offer_title[<?=$o_lang?>]" size="50" maxlength="100" value="<?=set_value("offer_title[{$o_lang}]")?>">
+																<span class="help-inline">Inserisci il titolo (In <?=$o_name?>) che verr&agrave; visualizzato nella pagina delle offerte.</span>
+															</div>	
+														</div> <!-- /.control-group -->
+														
+														
+														<div class="control-group  <?php if(form_error('offer_body['.$o_lang.']')) echo "error";?>">
+															<label class="control-label" for="offer_title">Testo Offerta</label>
+															<div class="controls">
+																	<textarea <?if($if_hidden) echo "disabled"?> class="input-xlarge" rows="5" id="offer_body[<?=$o_lang?>]" name="offer_body[<?=$o_lang?>]"><?=set_value('offer_body['.$o_lang.']')?></textarea>
+																<span class="help-inline">Inserisci il testo (In <?=$o_name?>) che verr&agrave; visualizzato nell'offerta.</span>
+															</div>
+														</div> <!-- /.control-group -->
+														
+													</div>
+												</div>
+											</div> <!-- /.accordion-group -->
+									<?php endforeach ?>
+					
+								</div> <!-- /#title_accordion -->
+							
 
 							<div class="control-group <? if(form_error('offer_special')) echo "error"?>">
 								<label class="control-label" for="offer_special">Offerta Speciale</label>
@@ -157,7 +225,7 @@ $(document).ready(function(){
 							</div>
 							</div> -->
 
-							<div class="control-group <? if(form_error('expires')) echo "error"?>">
+							<!-- <div class="control-group <? if(form_error('expires')) echo "error"?>">
 								<label class="control-label" for="add_expires">Con Scadenza</label>
 								<div class="controls">
 									<label class="checkbox">
@@ -165,7 +233,7 @@ $(document).ready(function(){
 										Seleziona questa opzione se desideri che l'offerta abbia una data di scadenza dopo la quale il sistema la disattiver&agrave; in automatico.
 									</label>
 								</div>
-							</div>
+							</div> -->
 
 							<div id="expires" class="control-group <? if(form_error('offer_expire')) echo "error"?>">
 								<label class="control-label" for="offer_expire">Scadenza</label>
@@ -178,13 +246,14 @@ $(document).ready(function(){
 						</fieldset>
 						<fieldset>
 
-							<div class="control-group  <? if(form_error('offer_body')) echo "error"?>">
+							<!-- Old Single-Language Body -->
+							<!-- <div class="control-group  <? if(form_error('offer_body')) echo "error"?>">
 								<label class="control-label" for="textarea">Testo</label>
 								<div class="controls">
 									<textarea class="input-xlarge" rows="5" id="offer_body" name="offer_body"><?=set_value('offer_body')?></textarea>
 									<span class="help-inline">Inserisci il testo che verr&agrave; visualizzato nella pagina delle offerte.</span>
 								</div>
-							</div>
+							</div> -->
 
 							<div class="control-group">
 								<label class="control-label" for="offer_image">Immagine Offerta</label>
@@ -208,6 +277,33 @@ $(document).ready(function(){
 						</fieldset>
 
 						<div class="form-actions">
+							
+							<div class="accordion" id="translate_accordion">
+								<div class="accordion-group">
+									<div class="accordion-heading">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#translate_accordion" href="#title_lang_new">Aggiungi Traduzione</a>
+									</div>
+									<div id="title_lang_new" class="accordion-body collapse">
+										<div class="accordion-inner">
+											<div class="control-group">
+												<label class="control-label" for="new_lang">Nuova Lingua:</label>
+												<div class="controls">									
+													<select name="new_lang" id="new_lang">
+														<option disabled selected>-Seleziona-</option>
+														<?php foreach ($lang_diff as $alang => $name): ?>
+															<option value="<?=$alang?>"><?=$name?></option>
+														<?php endforeach ?>
+													</select>
+													&nbsp;<a href="#" class="btn" id="add_lang">Aggiungi</a>
+													<span class="help-inline">Seleziona la lingua da aggiungere, se nessuna lingua è visibile nel menu non è possibile aggiungere altre traduzioni. <em>Le lingue disponibili sono: <?=implode($LANGUAGES, ", ")?></em></span>
+												</div>
+											</div> <!-- .control-group -->
+										</div>
+									</div>
+								</div> <!-- /.accordion-group -->
+				
+							</div> <!-- /#translate_accordion -->
+							
 							<button type="submit" class="btn btn-primary">Salva Offerta</button>
 							<button type="reset" class="btn">Cancella Dati</button>
 							<?=anchor('admin/main', "Annulla", array('class'=>'btn'));?>
@@ -216,7 +312,7 @@ $(document).ready(function(){
 
 				</div>
 
-				<div class="tab-pane fade" id="offer-settings">
+				<div class="tab-pane fade <?php if( $active_tab == "offer-settings") echo "in active" ?>" id="offer-settings">
 					<h2>Impostazioni Generali</h2>
 					<div class="well">
 						<h3>Colori</h3>
@@ -336,12 +432,12 @@ $(document).ready(function(){
 				</div>
 				
 				
-				<div class="tab-pane fade" id="offer-descr">
+				<div class="tab-pane fade <?php if( $active_tab == "offer-descr") echo "in active" ?>" id="offer-descr">
 					<p class="dark">Con il servizio offerte potrai inserire nella pagina dedicata del tuo sito offerte e promozioni riguardanti i tuoi servizi e prodotti.
 					Potrai deciderne la scadenza e se hai sottoscritto anche il servizio <em>Newsletter</em> avvisare in automatico i tuoi clienti che si sono registrati sul tuo sito dei nuovi inserimenti.</p>
 				</div>
 				
-				<div class="tab-pane fade" id="service-html-code">
+				<div class="tab-pane fade <?php if( $active_tab == "service-html-code") echo "in active" ?>" id="service-html-code">
 					<h2>Codice per l'utilizzo del servizio 'Gallery'</h2>
 					<p>Per utilizzare il servizio Gallery fornito da IrisLogin in una qualsiasi pagina è sufficiente utilizzare il seguente codice HTML.</p>
 

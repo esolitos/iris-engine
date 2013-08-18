@@ -26,6 +26,14 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+
+define('LANG_DEFAULT', 'it');
+define('LANG_ITA', 'it');
+define('LANG_DEU', 'de');
+define('LANG_ENG', 'en');
+define('LANG_FRA', 'fr');
+$LANGUAGES = array('it'=>"Italiano", 'de'=>"Tedesco", 'en'=>"Inglese");
+
 /*
 |--------------------------------------------------------------------------
 | User defined Constants
@@ -88,6 +96,7 @@ define('TABLE_SUBSCRIPTIONS', 'subscription');
 
 define('TABLE_RESERVATIONS', 'srvc_booking');
 define('TABLE_OFFERS', 'srvc_offers');
+define('TABLE_OFFERS_LANGUAGE', 'srvc_offers_lang');
 define('TABLE_NEWSLETTER', 'srvc_newsletter');
 define('TABLE_GALLERY', 'srvc_gallery');
 define('TABLE_GALLERY_IMAGES', 'srvc_gallery_images');

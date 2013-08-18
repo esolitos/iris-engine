@@ -102,6 +102,25 @@ ol.controls li {
 	margin-left:10px;
 }
 
+.accordion {
+	width: 95%;
+	margin: 0px auto 20px auto;
+	background-color:#F9F9F9;
+}
+
+.accordion-heading {
+	font-size: 1.45em;
+}
+
+.form-actions .accordion {
+	width: 100%;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
 /* ------------------------ Header ------------------------ */
 #header {
 	margin:0;
@@ -540,6 +559,18 @@ ol.controls li {
 	-webkit-border-radius: 0 0 6px 0;
 	-moz-border-radius: 0 0 6px 0;
 	border-radius: 0 0 6px 0;
+}
+
+#form-add-offer .remove_lang {
+	float: left;
+	margin: 6px 30px 0px 20px;
+}
+
+#form-add-offer #title_accordion .accordion-toggle {
+	display: block;
+	margin: 0 auto;
+	width: 30%;
+	padding: 8px 30%;
 }
 
 #form-edit-offer .form-actions {
