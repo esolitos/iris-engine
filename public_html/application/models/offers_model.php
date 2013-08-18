@@ -135,31 +135,6 @@ class Offers_Model extends CI_Model
 	{
 		try
 		{
-			$data['offer_last_edit'] = strftime('%F %T');
-			
-			// If a new image has ben set, remove the old one from the server.
-			if( isset($data['offer_image']) )
-				$this->_delete_img($id);
-			
-			if ( empty($data['offer_special']))
-				$data['offer_special'] = 0;
-			
-			// if an expiration date has been set, format it in the right way.
-			if( empty($data['offer_expire']) )
-			{
-				$data['offer_expire']=NULL;
-			}
-			else
-			{
-				$date = $data['offer_expire'];
-
-				$this->db->set('offer_expire', "STR_TO_DATE('{$date}', '%d-%m-%Y')", FALSE);
-
-				unset($data['offer_expire']);
-				unset($data['expires']);
-			}
-
-
 			// Removing unused languages
 			$result['languages_removed'] = 0;
 			if ( ! empty($data['remove_lang'])) {
@@ -189,6 +164,30 @@ class Offers_Model extends CI_Model
 			unset($data['offer_title']);			
 			unset($data['offer_body']);
 			
+			
+			$data['offer_last_edit'] = strftime('%F %T');
+			
+			// If a new image has ben set, remove the old one from the server.
+			if( isset($data['offer_image']) )
+				$this->_delete_img($id);
+			
+			if ( empty($data['offer_special']))
+				$data['offer_special'] = 0;
+			
+			// if an expiration date has been set, format it in the right way.
+			if( empty($data['offer_expire']) )
+			{
+				$data['offer_expire']=NULL;
+			}
+			else
+			{
+				$date = $data['offer_expire'];
+
+				$this->db->set('offer_expire', "STR_TO_DATE('{$date}', '%d-%m-%Y')", FALSE);
+
+				unset($data['offer_expire']);
+				unset($data['expires']);
+			}
 			
 			// Finally updating the offer settings
 			$this->db->where('id', $id);
