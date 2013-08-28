@@ -61,7 +61,7 @@
 									<img src="<?=base_url("/public/img/icon-special.png")?>" class="special-img">
 								<?php endif ?>
 							<? endif; ?>
-							<?=anchor("offers/view/{$offer->id}", $c_title)?>
+							<a href="<? echo(base_url()."offers/view/{$offer->id}?lang=".CURR_LANG_CODE."&{$options['url_safe']}")?>"><?=$c_title?></a>
 							<?if($offer->expired AND $user):?>
 								<span class="title_expired">[EXPIRED]</span>
 							<?endif;?>

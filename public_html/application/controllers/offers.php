@@ -3,7 +3,6 @@
 class Offers extends ESO_Controller
 {
 	var $view_data;
-	var $lang;
 	
 	function __construct()
 	{
@@ -18,6 +17,7 @@ class Offers extends ESO_Controller
 		$this->view_data['is_admin'] = FALSE;
 		$this->view_data['user'] = $this->session->all_userdata();
 		$this->view_data['options'] = explode(',', $this->input->get('options'));
+		$this->view_data['options']['url_safe'] = (strlen($this->input->get('options')) > 1) ? "options=".$this->input->get('options') : "";
 	}
 
 	public function index($w_id=FALSE)
@@ -44,7 +44,7 @@ class Offers extends ESO_Controller
 	
 	public function view($o_id)
 	{
-		$offer_data = $this->offers_model->load_offer($o_id);
+		$offer_data = $this->offers_model->load_offer($o_id, CURR_LANG_CODE, in_array('lang-strict', $this->view_data['options']));
 		
 		if($offer_data['status'])
 		{

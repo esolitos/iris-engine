@@ -225,9 +225,9 @@ class Offers_Model extends CI_Model
 		}
 	}	
 	
-	function load_offer($id, $lang=NULL)
+	function load_offer($id, $language=LANG_DEFAULT, $lang_strict=TRUE)
 	{
-		$this->db->select("id AS offer_id, website_id, offer_creation, DATE_FORMAT(offer_expire, '%d-%m-%Y') as offer_expire, offer_special, offer_visible, offer_image", FALSE)
+		$this->db->select("id, id AS offer_id, website_id, offer_creation, DATE_FORMAT(offer_expire, '%d-%m-%Y') as offer_expire, offer_special, offer_visible, offer_image", FALSE)
 			->from(TABLE_OFFERS)
 			->join(TABLE_USERS, 'author_id = user_id')
 			->where('id', $id);
@@ -242,23 +242,10 @@ class Offers_Model extends CI_Model
 			else
 				$row->expired = $this->_is_expired($row->offer_expire);
 			
-			$query->free_result();
+			if($this->_getTranslations($row, $language, $lang_strict))
+				return array('status' => TRUE, 'result' => $row);	
 
-			if($lang)
-				$query = $this->db->get_where(TABLE_OFFERS_LANGUAGE, array('offer_id'=>$id, 'lang'=>$lang));
-			else
-				$query = $this->db->get_where(TABLE_OFFERS_LANGUAGE, array('offer_id'=>$id));
-			
-			foreach ($query->result() as $multilang_content)
-			{
-				$cur_lang = $multilang_content->lang;
-				$row->languages[$cur_lang] = $cur_lang;
-				
-				$row->offer_title[$cur_lang] = $multilang_content->offer_title;
-				$row->offer_body[$cur_lang] = $multilang_content->offer_body;
-			}
-			 				
-			return array('status' => TRUE, 'result' => $row);
+			return array('status' => FALSE, 'error_code' => 'OFF2', 'error' => "Error while loading offer #{$id} translation from the database.");
 		}
 		else
 			return array('status' => FALSE, 'error_code' => 'OFF1', 'error' => "Offer {$id} is not in the database.");
@@ -307,7 +294,7 @@ class Offers_Model extends CI_Model
 			{
 				$offer->offer_title_multi[$trans_row->lang] = $trans_row->offer_title;
 				$offer->offer_body_multi[$trans_row->lang] = $trans_row->offer_body;
-				if( $trans_row->lang == LANG_DEFAULT )
+				if( $trans_row->lang == $lang || ( ! isset($offer->offer_title) && $trans_row->lang == LANG_DEFAULT) )
 				{
 					$offer->offer_title = $trans_row->offer_title;
 					$offer->offer_body = $trans_row->offer_body;
