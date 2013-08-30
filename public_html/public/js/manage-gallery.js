@@ -30,7 +30,7 @@ function hide_gallery () {
 function loadGallery(g_url){
 	jQuery('<iframe/>').attr({
 		src: g_url+"/standalone",
-		style: "position:absolute; top:10%; left:10%; width:80%; height:80%; min-height:520px;min-width:400px;",
+		style: "position:absolute; top:10%; left:10%; width:80%; min-height:520px; min-width:400px;",
 		frameborder: 'no',
 		id: gallery_iframe_id
 	}).appendTo(wrapper_element);
@@ -62,6 +62,7 @@ function onMessage (event) {
 	}
 }
 
+// ---- Let's start this thing up! -----
 jQuery().ready(function(){
 	IEv = getIE_Version();
 	if( IEv > 0 && IEv < 8 ) {
@@ -69,10 +70,9 @@ jQuery().ready(function(){
 	}
 	
 	// Create the wrapper
-	windowHeight = $(window).height();
 	wrapper_element = $('<div/>').attr({
 		id: gallery_iframe_wrapper_id,
-		style: "position: fixed;top:0;left:0;height:"+windowHeight+";width:100%;display: none;background-color:black;background-color:rgba(0,0,0,0.7);"
+		style: "position: fixed;top:0;left:0;bottom:0;right:0;height:"+$(window).height()+"px;width:100%;display: none;background-color:black;background-color:rgba(0,0,0,0.7);z-index:10000000;"
 	}).appendTo("body");
 	
 	// Create closing icon
@@ -86,11 +86,7 @@ jQuery().ready(function(){
 	});
 	
 	$(window).bind('resize', function(){
-		windowHeight = $(window).height();
-		// console.log(windowHeight);
-		console.log(document.documentElement.clientHeight);
-		$("#"+gallery_iframe_wrapper_id).css('height', windowHeight);
-		// $("#"+gallery_iframe_id).css('height', windowHeight)
+		$("#"+gallery_iframe_wrapper_id).css('height', $(window).height());
 	});
 	
 	// Finally add the listenbers
