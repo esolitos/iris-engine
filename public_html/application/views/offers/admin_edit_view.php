@@ -1,4 +1,4 @@
-<? global $LANGUAGES ?>
+<?php global $LANGUAGES ?>
 <div class="content clearfix">
 	<script src="/public/js/jquery-ui.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" href="/public/css/jquery-ui.css" type="text/css" media="screen" title="no title" charset="utf-8">
@@ -44,7 +44,7 @@
 
 	</script>
 	
-	<h2> Mofifica dell'offerta: <small>"<?=$offer->offer_title[LANG_DEFAULT]?>"</small></h2>
+	<h2> Mofifica dell'offerta: <small>"<?=$offer->offer_title_multi[LANG_DEFAULT]?>"</small></h2>
 	<small>(NOTA: Tutte le modifiche verranno apportate soltanto dopo aver cliccato "Salve Modifiche"!)</small>
 
 	<?if($error):?>
@@ -86,8 +86,8 @@
 											<div class="controls">
 												<?php if(set_value('offer_title['.$o_lang.']')): ?>
 													<input type="text" class="input-xlarge focused" name="offer_title[<?=$o_lang?>]" size="50" maxlength="100" value="<?=set_value('offer_title['.$o_lang.']')?>">
-												<?php elseif ( isset($offer->offer_title[$o_lang]) ): ?>
-													<input type="text" class="input-xlarge focused" name="offer_title[<?=$o_lang?>]" size="50" maxlength="100" value="<?=$offer->offer_title[$o_lang]?>">
+												<?php elseif ( isset($offer->offer_title_multi[$o_lang]) ): ?>
+													<input type="text" class="input-xlarge focused" name="offer_title[<?=$o_lang?>]" size="50" maxlength="100" value="<?=$offer->offer_title_multi[$o_lang]?>">
 												<?php else: ?>
 													<input <?php if($if_hidden ) echo "disabled"?> type="text" class="input-xlarge focused" name="offer_title[<?=$o_lang?>]" size="50" maxlength="100" value="">
 												<?php endif ?>
@@ -98,8 +98,8 @@
 											<div class="controls">
 												<?php if(set_value('offer_body['.$o_lang.']')): ?>
 													<textarea class="input-xlarge" rows="5" id="offer_body[<?=$o_lang?>]" name="offer_body[<?=$o_lang?>]"><?=set_value('offer_body['.$o_lang.']')?></textarea>
-												<?php elseif ( isset($offer->offer_body[$o_lang]) ): ?>
-													<textarea class="input-xlarge" rows="5" id="offer_body[<?=$o_lang?>]" name="offer_body[<?=$o_lang?>]"><?=$offer->offer_body[$o_lang]?></textarea>
+												<?php elseif ( isset($offer->offer_body_multi[$o_lang]) ): ?>
+													<textarea class="input-xlarge" rows="5" id="offer_body[<?=$o_lang?>]" name="offer_body[<?=$o_lang?>]"><?=$offer->offer_body_multi[$o_lang]?></textarea>
 												<?php else: ?>
 													<textarea <?php if($if_hidden ) echo "disabled"?> class="input-xlarge" rows="5" id="offer_body[<?=$o_lang?>]" name="offer_body[<?=$o_lang?>]"></textarea>
 												<?php endif ?>

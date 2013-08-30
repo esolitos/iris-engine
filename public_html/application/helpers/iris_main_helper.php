@@ -215,13 +215,19 @@ if( ! function_exists('init_viewdata') )
 		return json_decode($result);
 	}
 	
-	function mkdir_if($dirname='', $perm = '0775')
+	function mkdir_if($dirname='', $perm = '01775')
 	{
+		$old_mask = umask(0);
 		if ( ! file_exists($dirname))
-			return mkdir($dirname, $perm, TRUE);
+		{
+			$result = mkdir($dirname, $perm, TRUE);
+			return ($result && chmod($dirname, $perm));
+		}
 		
+		umask($old_mask);
 		return TRUE;
 	}
+
 	
 	function unlink_if($filename='')
 	{

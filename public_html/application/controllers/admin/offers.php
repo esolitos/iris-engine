@@ -94,7 +94,7 @@ class Offers extends ESO_Controller
 			$this->form_config[] = array(
 				'field'   => 'offer_title['.$l.']', 
 				'label'   => 'titolo del\'offerta tradotto in '.$LANGUAGES[$l], 
-				'rules'   => 'required|max_length[50]|min_length[3]'
+				'rules'   => 'trim|required|max_length[100]|min_length[1]'
 			);
 			$this->form_config[] = array(
 				'field'   => 'offer_body['.$l.']', 
@@ -165,7 +165,7 @@ class Offers extends ESO_Controller
 			if(is_numeric($action))
 			{
 				
-				$offer_data = $this->offers_model->load_offer($action);
+				$offer_data = $this->offers_model->load_offer($action, LANG_DEFAULT, FALSE);
 				if($offer_data['status'] === TRUE)
 				{	
 					$this->view_data['lang_diff'] = array_diff_key($LANGUAGES, $offer_data['result']->languages);
@@ -199,7 +199,7 @@ class Offers extends ESO_Controller
 					$this->form_config[] = array(
 						'field'   => 'offer_title['.$l.']', 
 						'label'   => 'titolo tradotto in '.$LANGUAGES[$l].' del\'offerta', 
-						'rules'   => 'required|max_length[50]|min_length[3]'
+						'rules'   => 'trim|required|max_length[100]|min_length[1]'
 					);
 					$this->form_config[] = array(
 						'field'   => 'offer_body['.$l.']', 

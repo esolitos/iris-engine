@@ -292,6 +292,7 @@ class Offers_Model extends CI_Model
 			$translations = $this->db->get_where(TABLE_OFFERS_LANGUAGE, array('offer_id'=>$offer->id))->result();
 			foreach($translations as $trans_row)
 			{
+				$offer->languages[] = $trans_row->lang;
 				$offer->offer_title_multi[$trans_row->lang] = $trans_row->offer_title;
 				$offer->offer_body_multi[$trans_row->lang] = $trans_row->offer_body;
 				if( $trans_row->lang == $lang || ( ! isset($offer->offer_title) && $trans_row->lang == LANG_DEFAULT) )

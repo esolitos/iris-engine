@@ -1,4 +1,4 @@
-<? global $LANGUAGES ?>
+<?php global $LANGUAGES ?>
 <!-- <script src="/public/bootstrap/js/bootstrap-tab.js" type="text/javascript" charset="utf-8"></script> -->
 <!-- <script src="/public/bootstrap/js/bootstrap-transition.js" type="text/javascript" charset="utf-8"></script> -->
 <!-- <script src="/public/bootstrap/js/bootstrap-tooltip.js" type="text/javascript" charset="utf-8"></script> -->
@@ -50,7 +50,7 @@ $(document).ready(function(){
 		clicked.preventDefault();
 		var rlang = $(this).data("lang");
 		
-		$("#title_lang_"+rlang).attr('disabled', true).parents(".accordion-group").addClass("hidden");
+		$("#title_lang_"+rlang+" input[type=text], #title_lang_"+rlang+" textarea").attr('disabled', true).parents(".accordion-group").addClass("hidden");
 		
 		$("#new_lang option[value="+rlang+"]").attr('disabled', false);
 	} );
