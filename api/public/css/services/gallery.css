@@ -1,0 +1,43 @@
+div#images-row {
+	height:60px;
+}
+
+div#images-row label {
+	margin-top:18px;
+}
+
+ul#gallery-images {
+	list-style:none;
+	margin: 5px 0;
+}
+
+ul#gallery-images li#gallery-no-images {
+	font-style:italic;
+	margin-top:18px;
+}
+
+ul#gallery-images li {
+	float:left;
+	position: relative;
+}
+
+ul#gallery-images li{
+	margin:5px;
+	height:50px;
+}
+
+ul#gallery-images li img {
+	height:50px;
+	vertical-align:middle;
+}
+
+ul#gallery-images li .delete-img {
+	display:inline-block;
+	height:20px;
+	width:20px;
+	background-image:url('/public/img/btn-del-small.png');
+	background-size:contain;
+	position: absolute;
+	top: -8px;
+	right: -9px;
+}
